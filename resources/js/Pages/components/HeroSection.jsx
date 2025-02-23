@@ -1,17 +1,13 @@
 import React from "react";
-import heroImg from "../../../../public/assets/img/hero-img.jpeg";
+// import heroImg from "../../../../public/assets/img/hero-img.jpeg";
 
 const HeroSection = () => {
     return (
         <>
-            <div className={`h-screen relative`}>
-                <img
-                    src={heroImg}
-                    alt=""
-                    className="bg-cover h-10/11 opacity-50"
-                    style={{ width: "100%", height: "98%" }}
-                />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div
+                className={`bg-cover flex justify-center items-center bg-[url('../../../../public/assets/img/hero-img.jpeg')]`}
+            >
+                <div className="w-72 md:w-1/2 my-12">
                     <div className="block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <form action="" className="uppercase">
                             <fieldset className="flex items-center justify-center mt-4 mb-8 gap-4">

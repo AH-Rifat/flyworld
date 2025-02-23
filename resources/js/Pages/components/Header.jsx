@@ -30,11 +30,11 @@ const Header = () => {
                         href="#"
                         className="flex items-center space-x-3 rtl:space-x-reverse"
                     >
-                        <img src={logo} className="w-20" alt="Fly World Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                        <img src={logo} className="w-44" alt="Fly World Logo" />
+                        {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                             <span className="text-amber-400">Fly</span>{" "}
                             <span className="text-sky-400">World</span>
-                        </span>
+                        </span> */}
                     </a>
                     <button
                         data-collapse-toggle="navbar-multi-level"
@@ -62,7 +62,9 @@ const Header = () => {
                         </svg>
                     </button>
                     <div
-                        className={`${isOpen ? "block" : "hidden"} w-full md:block md:w-auto`}
+                        className={`${
+                            isOpen ? "block" : "hidden"
+                        } w-full md:block md:w-auto`}
                         id="navbar-multi-level"
                     >
                         <ul className="flex flex-col font-medium uppercase p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
