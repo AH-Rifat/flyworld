@@ -1,0 +1,20 @@
+{
+  "public/assets/img/fly-world-logo.png": {
+    "file": "assets/fly-world-logo-0MlqdOk4.png",
+    "src": "public/assets/img/fly-world-logo.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-iWcVf8NZ.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-BUj8OwJc.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "assets": [
+      "assets/fly-world-logo-0MlqdOk4.png"
+    ]
+  }
+}
