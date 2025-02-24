@@ -23,17 +23,41 @@
     "file": "assets/about-us-Ql_MtzpW.jpg",
     "src": "public/assets/img/about-us.jpg"
   },
+  "public/assets/img/current-offer-01.jpg": {
+    "file": "assets/current-offer-01-Cw7xcNuK.jpg",
+    "src": "public/assets/img/current-offer-01.jpg"
+  },
+  "public/assets/img/current-offer-02.jpg": {
+    "file": "assets/current-offer-02-JqjtsqwL.jpg",
+    "src": "public/assets/img/current-offer-02.jpg"
+  },
+  "public/assets/img/current-offer-03.jpg": {
+    "file": "assets/current-offer-03-glI30Cgq.jpg",
+    "src": "public/assets/img/current-offer-03.jpg"
+  },
+  "public/assets/img/current-offer-04.jpg": {
+    "file": "assets/current-offer-04-Dci9f4LP.jpg",
+    "src": "public/assets/img/current-offer-04.jpg"
+  },
+  "public/assets/img/current-offer-05.jpg": {
+    "file": "assets/current-offer-05-DYpMfaem.jpg",
+    "src": "public/assets/img/current-offer-05.jpg"
+  },
+  "public/assets/img/current-offer-06.jpg": {
+    "file": "assets/current-offer-06-DRe4AUQB.jpg",
+    "src": "public/assets/img/current-offer-06.jpg"
+  },
   "public/assets/img/fly-world-logo.png": {
     "file": "assets/fly-world-logo-Bto4eU2z.png",
     "src": "public/assets/img/fly-world-logo.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app--Jwwn6XN.css",
+    "file": "assets/app-Dn8p3Bbd.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BGe5xeQB.js",
+    "file": "assets/app-C0XzfpYF.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -43,6 +67,12 @@
     "assets": [
       "assets/fly-world-logo-Bto4eU2z.png",
       "assets/about-us-Ql_MtzpW.jpg",
+      "assets/current-offer-01-Cw7xcNuK.jpg",
+      "assets/current-offer-02-JqjtsqwL.jpg",
+      "assets/current-offer-03-glI30Cgq.jpg",
+      "assets/current-offer-04-Dci9f4LP.jpg",
+      "assets/current-offer-05-DYpMfaem.jpg",
+      "assets/current-offer-06-DRe4AUQB.jpg",
       "assets/ajax-loader-BcnMEykj.gif",
       "assets/slick-Bi9J8BMx.eot",
       "assets/slick-BlUtDIuC.woff",
