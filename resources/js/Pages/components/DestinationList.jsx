@@ -1,3 +1,8 @@
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
+
 const DestinationList = () => {
     const data = [
         {
@@ -31,31 +36,110 @@ const DestinationList = () => {
         },
     ];
 
+    const NextArrow = ({ onClick }) => (
+        <button
+            className="absolute right-[-10px] md:right-[-35px] top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition-all z-10"
+            onClick={onClick}
+            aria-label="Next"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-gray-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                />
+            </svg>
+        </button>
+    );
+
+    const PrevArrow = ({ onClick }) => (
+        <button
+            className="absolute left-[-10px] md:left-[-35px] top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition-all z-10"
+            onClick={onClick}
+            aria-label="Previous"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-gray-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                />
+            </svg>
+        </button>
+    );
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5, // Show 3 slides at once
+        slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        autoplay: false,
+        autoplaySpeed: 2000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
+        ],
+    };
+
     return (
         <div className="py-20 bg-yellow-50 my-8">
-            <h3 className="text-black font-bold text-3xl text-center">
+            <h3 className="text-black font-bold text-3xl text-center mb-12">
                 International Destinations Open for Travel
             </h3>
-            <div className="flex flex-col md:flex-row justify-center items-center text-center gap-8 my-8 mx-10">
-                {data.map((item) => {
-                    return (
-                        <div key={item.id} className="card">
-                            <div className="overflow-hidden rounded-t-lg">
-                                <img
-                                    src={item.image}
-                                    alt="image"
-                                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-125"
-                                />
+            <div className="px-4 md:px-8 max-w-7xl mx-auto">
+                {/* Added container constraints */}
+                <Slider {...settings}>
+                    {data.map((item) => (
+                        <div key={item.id} className="px-2">
+                            {/* Added padding between slides */}
+                            <div className="card mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                                <div className="h-44 overflow-hidden">
+                                    {/* Fixed height for images */}
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover transform transition duration-500 hover:scale-110"
+                                    />
+                                </div>
+                                <div className="p-4 text-center">
+                                    <p className="text-xl font-semibold mb-4">
+                                        {item.name}
+                                    </p>
+                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                        More
+                                    </button>
+                                </div>
                             </div>
-                            <p className="text-xl font-semibold my-4">
-                                {item.name}
-                            </p>
-                            <button className="mb-5 text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 font-semibold rounded-lg text-lg px-6 py-0.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">
-                                More
-                            </button>
                         </div>
-                    );
-                })}
+                    ))}
+                </Slider>
             </div>
         </div>
     );
