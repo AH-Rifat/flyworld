@@ -158,7 +158,7 @@ const AboutUs = () => {
                     })}
                 </section>
 
-                <section className="grid grid-cols-1 md:grid-cols-4 gap-4 my-40">
+                <section className="grid grid-cols-1 md:grid-cols-4 gap-4 my-10">
                     {data2.map((item) => {
                         return (
                             <div key={item.id} className="p-6">
@@ -178,7 +178,7 @@ const AboutUs = () => {
                     })}
                 </section>
             </section>
-
+            <hr className="text-yellow-200 my-20" />
             <Footer />
         </>
     );

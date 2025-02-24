@@ -24,7 +24,7 @@ const BestDealSection = () => {
                                     src={
                                         "https://ak-d.tripcdn.com/images/0224j12000a2dmdmf803D_W_960_540_R5.webp"
                                     }
-                                    alt=""
+                                    alt="image"
                                 />
                                 <div className="p-4">
                                     <h2 className="mx-2 text-lg font-semibold">
