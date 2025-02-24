@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "../../../../public/assets/img/fly-world-logo.png";
 import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { Link } from "@inertiajs/react";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -26,8 +27,8 @@ const Header = () => {
             </section>
             <nav className="bg-white shadow-md border-gray-200 dark:bg-gray-900 dark:border-gray-700">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
-                    <a
-                        href="#"
+                    <Link
+                        href="/"
                         className="flex items-center space-x-3 rtl:space-x-reverse"
                     >
                         <img src={logo} className="w-44" alt="Fly World Logo" />
@@ -35,7 +36,7 @@ const Header = () => {
                             <span className="text-amber-400">Fly</span>{" "}
                             <span className="text-sky-400">World</span>
                         </span> */}
-                    </a>
+                    </Link>
                     <button
                         data-collapse-toggle="navbar-multi-level"
                         type="button"
@@ -69,13 +70,13 @@ const Header = () => {
                     >
                         <ul className="flex flex-col font-medium uppercase p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/"
                                     className="block py-2 px-3 text-white bg-sky-700 rounded-sm md:bg-transparent md:text-sky-700 md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent"
                                     aria-current="page"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a
@@ -102,12 +103,12 @@ const Header = () => {
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="about-us"
                                     className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 dark:text-white md:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                                 >
                                     About Us
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

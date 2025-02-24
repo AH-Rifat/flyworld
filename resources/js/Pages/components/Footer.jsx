@@ -5,22 +5,22 @@ import { FaFacebookSquare, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 const Footer = () => {
     return (
         <>
-            <footer class="bg-white dark:bg-gray-900 mt-14">
-                <div class="p-4 py-6 lg:py-8 max-w-screen-xl mx-auto">
-                    <div class="md:flex md:justify-between">
-                        <Link href="/" class="flex items-center justify-center">
+            <footer className="bg-white dark:bg-gray-900 mt-14">
+                <div className="p-4 py-6 lg:py-8 max-w-screen-xl mx-auto">
+                    <div className="md:flex md:justify-between">
+                        <Link href="/" className="flex items-center justify-center">
                             <img
                                 src={logo}
-                                class="h-20 me-3 mb-8"
+                                className="h-20 me-3 mb-8"
                                 alt="Flyworld Logo"
                             />
                         </Link>
-                        <div class="flex flex-col md:flex-row justify-between gap-6">
+                        <div className="flex flex-col md:flex-row justify-between gap-6">
                             <div>
                                 <h2>Payment Methods</h2>
                                 <ul>
                                     <li className="grid grid-cols-4">
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/visa-sq.png"
@@ -30,7 +30,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/masterc-sq.png"
@@ -40,7 +40,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/amex-sq.png"
@@ -50,7 +50,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/dbbl-nexus-sq.png"
@@ -60,7 +60,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/dbbl-visa-sq.png"
@@ -70,7 +70,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/dbbl-master-sq.png"
@@ -80,7 +80,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/bkash-sq.png"
@@ -90,7 +90,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/mcash-sq.png"
@@ -100,7 +100,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/my-cash-sq.png"
@@ -110,7 +110,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/ab_direct-sq.png"
@@ -120,7 +120,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/upay-sq.png"
@@ -130,7 +130,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/bankasia-sq.png"
@@ -140,7 +140,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/mtb-sq.png"
@@ -150,7 +150,7 @@ const Footer = () => {
                                                 />
                                             </a>
                                         </div>
-                                        <div class="m-2">
+                                        <div className="m-2">
                                             <a href="#">
                                                 <img
                                                     src="https://securepay.sslcommerz.com/gwprocess/v3/assets/img/tapnpay-sq.png"
@@ -162,7 +162,7 @@ const Footer = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="mb-2">
+                                        <div className="mb-2">
                                             <a href="#">
                                                 <img
                                                     src="https://chologhuri.com/image/ecab.png"
@@ -175,11 +175,11 @@ const Footer = () => {
                                 </ul>
                             </div>
                             <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                                     Address
                                 </h2>
-                                <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                                    <li class="mb-4">
+                                <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                                    <li className="mb-4">
                                         <p>
                                             Dhaka Office: <br />
                                             Sat Masjid Super Market, <br />
@@ -187,7 +187,7 @@ const Footer = () => {
                                             Bangladesh, Phone: +88020000000
                                         </p>
                                     </li>
-                                    <li class="mb-4">
+                                    <li className="mb-4">
                                         <p>
                                             Our Trade License Number is: <br />{" "}
                                             TRAD/DSCC/000000/0000
@@ -196,17 +196,17 @@ const Footer = () => {
                                 </ul>
                             </div>
                             <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                                     Legal
                                 </h2>
-                                <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                                    <li class="mb-4">
-                                        <a href="#" class="hover:underline">
+                                <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                                    <li className="mb-4">
+                                        <a href="#" className="hover:underline">
                                             Privacy Policy
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="hover:underline">
+                                        <a href="#" className="hover:underline">
                                             Terms &amp; Conditions
                                         </a>
                                     </li>
@@ -216,14 +216,14 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 
-                <div class="sm:flex sm:items-center sm:justify-between p-2 mb-4 mx-10">
-                    <span class="text-sm text-gray-600 sm:text-center dark:text-gray-400">
+                <div className="sm:flex sm:items-center sm:justify-between p-2 mb-4 mx-10">
+                    <span className="text-sm text-gray-600 sm:text-center dark:text-gray-400">
                         © {new Date().getFullYear()}
                         <a
                             href="https://flowbite.com/"
-                            class="hover:underline ms-1"
+                            className="hover:underline ms-1"
                         >
                             <span className="self-center font-semibold whitespace-nowrap dark:text-white">
                                 <span className="text-amber-400">Fly</span>{" "}
@@ -232,27 +232,27 @@ const Footer = () => {
                         </a>
                         . All Rights Reserved.
                     </span>
-                    <div class="flex sm:justify-center justify-center sm:mt-0 mt-4">
+                    <div className="flex sm:justify-center justify-center sm:mt-0 mt-4">
                         <a
                             href="#"
-                            class="text-sky-500 hover:text-sky-900 dark:hover:text-white"
+                            className="text-sky-500 hover:text-sky-900 dark:hover:text-white"
                         >
                             <FaFacebookSquare className="w-8 h-8" />
-                            <span class="sr-only">Facebook page</span>
+                            <span className="sr-only">Facebook page</span>
                         </a>
                         <a
                             href="#"
-                            class="text-sky-500 hover:text-sky-900 dark:hover:text-white ms-5"
+                            className="text-sky-500 hover:text-sky-900 dark:hover:text-white ms-5"
                         >
                             <FaTwitterSquare className="w-8 h-8" />
-                            <span class="sr-only">Twitter page</span>
+                            <span className="sr-only">Twitter page</span>
                         </a>
                         <a
                             href="#"
-                            class="text-sky-500 hover:text-sky-900 dark:hover:text-white ms-5"
+                            className="text-sky-500 hover:text-sky-900 dark:hover:text-white ms-5"
                         >
                             <FaLinkedin className="w-8 h-8" />
-                            <span class="sr-only">Linkedin page</span>
+                            <span className="sr-only">Linkedin page</span>
                         </a>
                     </div>
                 </div>
