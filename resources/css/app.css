@@ -4,5 +4,5 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .card{
-    @apply max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700
+    @apply block max-w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700
 }

@@ -8,7 +8,10 @@ const Footer = () => {
             <footer className="bg-white dark:bg-gray-900 mt-14">
                 <div className="p-4 py-6 lg:py-8 max-w-screen-xl mx-auto">
                     <div className="md:flex md:justify-between">
-                        <Link href="/" className="flex items-center justify-center">
+                        <Link
+                            href="/"
+                            className="flex items-center justify-center"
+                        >
                             <img
                                 src={logo}
                                 className="h-20 me-3 mb-8"
@@ -221,15 +224,12 @@ const Footer = () => {
                 <div className="sm:flex sm:items-center sm:justify-between p-2 mb-4 mx-10">
                     <span className="text-sm text-gray-600 sm:text-center dark:text-gray-400">
                         © {new Date().getFullYear()}
-                        <a
-                            href="https://flowbite.com/"
-                            className="hover:underline ms-1"
-                        >
+                        <Link href="/" className="hover:underline ms-1">
                             <span className="self-center font-semibold whitespace-nowrap dark:text-white">
                                 <span className="text-amber-400">Fly</span>{" "}
                                 <span className="text-sky-400">World</span>
                             </span>
-                        </a>
+                        </Link>
                         . All Rights Reserved.
                     </span>
                     <div className="flex sm:justify-center justify-center sm:mt-0 mt-4">
