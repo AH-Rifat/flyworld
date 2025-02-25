@@ -34,6 +34,24 @@ const DestinationList = () => {
             image: "https://images.unsplash.com/photo-1496372412473-e8548ffd82bc?q=80&w=1614&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             link: "",
         },
+        {
+            id: 6,
+            name: "Egypt",
+            image: "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            link: "",
+        },
+        {
+            id: 7,
+            name: "Turkey",
+            image: "https://images.unsplash.com/photo-1623621534850-d325a1980c7e?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            link: "",
+        },
+        {
+            id: 8,
+            name: "Sri Lanka",
+            image: "https://images.unsplash.com/photo-1586846288010-25744d79a132?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            link: "",
+        },
     ];
 
     const NextArrow = ({ onClick }) => (
@@ -109,7 +127,7 @@ const DestinationList = () => {
     };
 
     return (
-        <div className="py-20 bg-yellow-50 my-8">
+        <div className="py-20 my-8 h-[35rem] bg-cover bg-[url('https://images.unsplash.com/photo-1534795366056-59754c3c9def?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
             <h3 className="text-black font-bold text-3xl text-center mb-12">
                 International Destinations Open for Travel
             </h3>
@@ -117,7 +135,7 @@ const DestinationList = () => {
                 {/* Added container constraints */}
                 <Slider {...settings}>
                     {data.map((item) => (
-                        <div key={item.id} className="px-2">
+                        <div key={item.id} className="px-3">
                             {/* Added padding between slides */}
                             <div className="card mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
                                 <div className="h-44 overflow-hidden">

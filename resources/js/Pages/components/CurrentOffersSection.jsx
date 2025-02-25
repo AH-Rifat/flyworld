@@ -13,8 +13,8 @@ const CurrentOffersSection = () => {
                     Current Offers
                 </h3>
                 <p className="text-gray-700 my-4">
-                    Discover the latest Chologhuri offers and deals for your
-                    next travel
+                    Discover the latest Flyworld offers and deals for your next
+                    travel
                 </p>
             </div>
 
