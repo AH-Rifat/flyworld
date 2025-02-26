@@ -1,18 +1,38 @@
 import logo from "../../../../public/assets/img/how-flyworld-works.png";
+import logo2 from "../../../../public/assets/img/how-flyworld-works2.png";
 import bookIcon from "../../../../public/assets/img/soap-icon-books.png";
 import planIcon from "../../../../public/assets/img/soap-icon-plane.png";
 import beachIcon from "../../../../public/assets/img/soap-icon-beach.png";
 import availabilityIcon from "../../../../public/assets/img/soap-icon-availability.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const HowFlyworldWorksSection = () => {
+    AOS.init({
+        duration: 2000,
+        // delay: 800,
+    });
     return (
         <>
-            <section className="h-[46rem] bg-cover bg-[url('../../../public/assets/img/globe-map.jpg')]">
+            <section className="h-96 md:h-[46rem] bg-cover bg-[url('../../../public/assets/img/globe-map.jpg')]">
                 <h3 className="text-white font-bold text-3xl text-center absolute my-5 md:-my-9 lg:my-0 2xl:my-1 ms-7 md:ms-0 lg:top-760 2xl:top-840 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
                     How Flyworld Works?
                 </h3>
-                <div className="py-24 h-full">
+                {/* Mobile Version */}
+                {/* just middle company logo */}
+                <div className="block md:hidden overflow-hidden py-16">
+                    <img src={logo2} alt="image" className=" w-80 mx-auto" />
+                    <p className="text-sm relative left-30 bottom-23 font-semibold text-sky-700">
+                        www.flyworld.click
+                    </p>
+                </div>
+
+                {/* Desktop Version */}
+                <div className="hidden md:block py-24 h-full">
                     {/* top icon animation */}
-                    <div className="text-center text-white font-bold w-80 mx-auto flex flex-col-reverse items-center gap-2">
+                    <div
+                        data-aos="fade-down"
+                        className="text-center text-white font-bold w-80 mx-auto flex flex-col-reverse items-center gap-2 relative top-5"
+                    >
                         <img src={beachIcon} alt="icon" className="w-14" />
                         <div>
                             <h3 className="text-2xl">Explore Destinations</h3>
@@ -28,7 +48,10 @@ const HowFlyworldWorksSection = () => {
                         www.flyworld.click
                     </p>
                     {/* bottom icon animation */}
-                    <div className="text-center text-white font-bold w-80 mx-auto flex flex-col items-center gap-5">
+                    <div
+                        data-aos="fade-up"
+                        className="text-center text-white font-bold w-80 mx-auto flex flex-col items-center gap-2 relative bottom-10"
+                    >
                         <img
                             src={availabilityIcon}
                             alt="icon"
@@ -45,7 +68,10 @@ const HowFlyworldWorksSection = () => {
                     {/* middle icon animation */}
                     <div className="relative left-0 -top-105 md:-top-80 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
                         <div className="flex flex-row-reverse md:flex-row justify-between items-center text-white font-bold">
-                            <div className="text-end relative left-66 md:left-50 lg:left-62 2xl:left-132 flex flex-row-reverse items-center gap-5">
+                            <div
+                                data-aos="fade-right"
+                                className="text-end relative left-66 md:left-50 lg:left-68 2xl:left-138 flex flex-row-reverse items-center gap-3"
+                            >
                                 <img
                                     src={planIcon}
                                     alt="icon"
@@ -60,7 +86,10 @@ const HowFlyworldWorksSection = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="text-start relative right-28 md:right-10 lg:right-24 2xl:right-92 flex items-center gap-5">
+                            <div
+                                data-aos="fade-left"
+                                className="text-start relative right-28 md:right-10 lg:right-30 2xl:right-100 flex items-center gap-3"
+                            >
                                 <img
                                     src={bookIcon}
                                     alt="icon"

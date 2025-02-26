@@ -55,6 +55,10 @@
     "file": "assets/how-flyworld-works-D8e7Dn1U.png",
     "src": "public/assets/img/how-flyworld-works.png"
   },
+  "public/assets/img/how-flyworld-works2.png": {
+    "file": "assets/how-flyworld-works2-kBTZHzEM.png",
+    "src": "public/assets/img/how-flyworld-works2.png"
+  },
   "public/assets/img/soap-icon-availability.png": {
     "file": "assets/soap-icon-availability-DzAYdPYQ.png",
     "src": "public/assets/img/soap-icon-availability.png"
@@ -72,22 +76,23 @@
     "src": "public/assets/img/soap-icon-plane.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DcwFZL2v.css",
+    "file": "assets/app-abTisYvf.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BKY2UJ5V.js",
+    "file": "assets/app-DJk_HueS.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "css": [
-      "assets/app-BLcmu2AF.css"
+      "assets/app-DBZGg_8Q.css"
     ],
     "assets": [
       "assets/fly-world-logo-Bto4eU2z.png",
       "assets/about-us-Ql_MtzpW.jpg",
       "assets/how-flyworld-works-D8e7Dn1U.png",
+      "assets/how-flyworld-works2-kBTZHzEM.png",
       "assets/soap-icon-books-pMsXHmWB.png",
       "assets/soap-icon-plane-CruWbDYE.png",
       "assets/soap-icon-beach-BV-KU3HI.png",
