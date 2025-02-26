@@ -51,13 +51,33 @@
     "file": "assets/fly-world-logo-Bto4eU2z.png",
     "src": "public/assets/img/fly-world-logo.png"
   },
+  "public/assets/img/how-flyworld-works.png": {
+    "file": "assets/how-flyworld-works-D8e7Dn1U.png",
+    "src": "public/assets/img/how-flyworld-works.png"
+  },
+  "public/assets/img/soap-icon-availability.png": {
+    "file": "assets/soap-icon-availability-DzAYdPYQ.png",
+    "src": "public/assets/img/soap-icon-availability.png"
+  },
+  "public/assets/img/soap-icon-beach.png": {
+    "file": "assets/soap-icon-beach-BV-KU3HI.png",
+    "src": "public/assets/img/soap-icon-beach.png"
+  },
+  "public/assets/img/soap-icon-books.png": {
+    "file": "assets/soap-icon-books-pMsXHmWB.png",
+    "src": "public/assets/img/soap-icon-books.png"
+  },
+  "public/assets/img/soap-icon-plane.png": {
+    "file": "assets/soap-icon-plane-CruWbDYE.png",
+    "src": "public/assets/img/soap-icon-plane.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CM6rx3Gp.css",
+    "file": "assets/app-DcwFZL2v.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CuoToJhQ.js",
+    "file": "assets/app-BKY2UJ5V.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -67,6 +87,11 @@
     "assets": [
       "assets/fly-world-logo-Bto4eU2z.png",
       "assets/about-us-Ql_MtzpW.jpg",
+      "assets/how-flyworld-works-D8e7Dn1U.png",
+      "assets/soap-icon-books-pMsXHmWB.png",
+      "assets/soap-icon-plane-CruWbDYE.png",
+      "assets/soap-icon-beach-BV-KU3HI.png",
+      "assets/soap-icon-availability-DzAYdPYQ.png",
       "assets/current-offer-01-Cw7xcNuK.jpg",
       "assets/current-offer-02-JqjtsqwL.jpg",
       "assets/current-offer-03-glI30Cgq.jpg",
