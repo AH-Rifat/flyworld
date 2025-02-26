@@ -13,3 +13,7 @@ Route::get('/about-us', function () {
 Route::get('/tourist-packages', function () {
     return inertia('TouristPackages/TouristPackage');
 });
+
+Route::get('/visa-service', function () {
+    return inertia('VisaService/VisaService');
+});
