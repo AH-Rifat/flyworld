@@ -20,8 +20,8 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-between space-x-3 rtl:space-x-reverse">
-                        <a href="#">SignUp</a> <span>|</span>{" "}
-                        <a href="#">Login</a>
+                        <Link href="/register">SignUp</Link> <span>|</span>{" "}
+                        <Link href="/login">Login</Link>
                     </div>
                 </div>
             </section>

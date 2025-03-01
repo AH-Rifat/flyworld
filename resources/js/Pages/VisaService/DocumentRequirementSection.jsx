@@ -1,4 +1,4 @@
-import Accordion from "../components/Accordion";
+import Accordion from "../components/ui/Accordion";
 
 const DocumentRequirementSection = () => {
     const items = [
