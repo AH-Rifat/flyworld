@@ -20,7 +20,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-between space-x-3 rtl:space-x-reverse">
-                        <Link href="/register">SignUp</Link> <span>|</span>{" "}
+                        {/* <Link href="/register">SignUp</Link> <span>|</span>{" "} */}
                         <Link href="/login">Login</Link>
                     </div>
                 </div>
@@ -109,6 +109,10 @@ const Header = () => {
                                 >
                                     About Us
                                 </Link>
+                            </li>
+                            <li className="lg:hidden flex items-center gap-2 border-t mt-2 p-3">
+                                {/* <Link href="/register">SignUp</Link> <span>|</span>{" "} */}
+                                <Link href="/login">Login</Link>
                             </li>
                         </ul>
                     </div>

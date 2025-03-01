@@ -47,6 +47,10 @@
     "file": "assets/current-offer-06-DRe4AUQB.jpg",
     "src": "public/assets/img/current-offer-06.jpg"
   },
+  "public/assets/img/dashboard-logo.png": {
+    "file": "assets/dashboard-logo-BUFdZsVY.png",
+    "src": "public/assets/img/dashboard-logo.png"
+  },
   "public/assets/img/fly-world-logo.png": {
     "file": "assets/fly-world-logo-Bto4eU2z.png",
     "src": "public/assets/img/fly-world-logo.png"
@@ -76,12 +80,12 @@
     "src": "public/assets/img/soap-icon-plane.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Cxr4NSDD.css",
+    "file": "assets/app-DQSYzOey.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-N6Jsz_X9.js",
+    "file": "assets/app-CwaJStDe.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -91,6 +95,7 @@
     "assets": [
       "assets/fly-world-logo-Bto4eU2z.png",
       "assets/about-us-Ql_MtzpW.jpg",
+      "assets/dashboard-logo-BUFdZsVY.png",
       "assets/how-flyworld-works-D8e7Dn1U.png",
       "assets/how-flyworld-works2-kBTZHzEM.png",
       "assets/soap-icon-books-pMsXHmWB.png",

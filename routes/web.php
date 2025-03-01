@@ -18,15 +18,6 @@ Route::get('/visa-service', function () {
     return inertia('VisaService/VisaService');
 });
 
-
-// Route::get('/signup', function () {
-//     return inertia('Auth/SignUp');
-// });
-
-// Route::get('/login', function () {
-//     return inertia('Auth/Login')->middleware('auth');
-// });
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return inertia('Dashboard/Dashboard');
