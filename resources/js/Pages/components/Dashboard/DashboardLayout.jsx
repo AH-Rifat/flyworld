@@ -95,7 +95,7 @@ const DashboardLayout = ({ children }) => {
                             <div
                                 className={`${
                                     dropdownOpen ? "block" : "hidden"
-                                } py-2 space-y-2 bg-gray-200 rounded-b-xl dark:bg-gray-700`}
+                                } py-2 space-y-2 bg-gray-100 rounded-b-xl dark:bg-gray-700`}
                             >
                                 <Link
                                     href="/visa/view"
@@ -150,7 +150,7 @@ const DashboardLayout = ({ children }) => {
                             <div
                                 className={`${
                                     dropdownOpen1 ? "block" : "hidden"
-                                } py-2 space-y-2 bg-gray-200 rounded-b-xl dark:bg-gray-700`}
+                                } py-2 space-y-2 bg-gray-100 rounded-b-xl dark:bg-gray-700`}
                             >
                                 <Link
                                     href="/profile"
@@ -159,6 +159,17 @@ const DashboardLayout = ({ children }) => {
                                     } dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Profile
+                                </Link>
+
+                                <Link
+                                    href="/change-password"
+                                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 ${
+                                        url === "/change-password"
+                                            ? "bg-gray-300"
+                                            : ""
+                                    } dark:text-white dark:hover:bg-gray-700`}
+                                >
+                                    Password
                                 </Link>
                             </div>
                         </li>

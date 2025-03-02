@@ -26,4 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return inertia('Dashboard/Profile');
     })->name('profile');
+
+    Route::get('/change-password', function () {
+        return inertia('Dashboard/ChangePassword');
+    })->name('change-password');
 });
