@@ -5,6 +5,7 @@ import { FaCcVisa } from "react-icons/fa6";
 import { IoLogOutSharp } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 import dashboardLogo from "../../../../../public/assets/img/dashboard-logo.png";
+import { ToastContainer } from "react-toastify";
 
 const DashboardLayout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,6 +13,7 @@ const DashboardLayout = ({ children }) => {
     const [dropdownOpen1, setDropdownOpen1] = useState(false);
 
     const { auth } = usePage().props;
+    const { url, component } = usePage();
 
     return (
         <div className="h-screen bg-gray-50 dark:bg-gray-900">
@@ -54,7 +56,9 @@ const DashboardLayout = ({ children }) => {
                         <li>
                             <Link
                                 href="/dashboard"
-                                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group"
+                                className={`flex items-center p-2 mt-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 ${
+                                    url === "/dashboard" ? "bg-gray-300" : ""
+                                } dark:hover:bg-gray-700 group`}
                             >
                                 <MdDashboard />
                                 <span className="ms-3">Dashboard</span>
@@ -117,7 +121,9 @@ const DashboardLayout = ({ children }) => {
                         <li>
                             <button
                                 onClick={() => setDropdownOpen1(!dropdownOpen1)}
-                                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                className={`flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-300 ${
+                                    url === "/profile" ? "bg-gray-300" : ""
+                                } dark:text-white dark:hover:bg-gray-700`}
                             >
                                 <IoMdSettings />
                                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
@@ -147,8 +153,10 @@ const DashboardLayout = ({ children }) => {
                                 } py-2 space-y-2 bg-gray-200 rounded-b-xl dark:bg-gray-700`}
                             >
                                 <Link
-                                    href="/visa/view"
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                    href="/profile"
+                                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 ${
+                                        url === "/profile" ? "bg-gray-300" : ""
+                                    } dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Profile
                                 </Link>
@@ -185,6 +193,8 @@ const DashboardLayout = ({ children }) => {
                     {children}
                 </div>
             </div>
+
+            <ToastContainer />
         </div>
     );
 };

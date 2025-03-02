@@ -22,4 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return inertia('Dashboard/Dashboard');
     })->name('dashboard');
+
+    Route::get('/profile', function () {
+        return inertia('Dashboard/Profile');
+    })->name('profile');
 });
