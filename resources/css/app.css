@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-.card{
-    @apply block max-w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700
+.card {
+    @apply block max-w-full h-fit bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700;
+}
+
+.card-title {
+    @apply text-lg my-2 font-semibold text-gray-800;
 }

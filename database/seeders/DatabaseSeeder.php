@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,5 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'admin',
         //     'email' => 'admin@admin.com',
         // ]);
+
+        // for ($i = 0; $i < 15; $i++) {
+        //     Country::create([
+        //         'name' => fake()->country(),
+        //     ]);
+        // }
     }
 }

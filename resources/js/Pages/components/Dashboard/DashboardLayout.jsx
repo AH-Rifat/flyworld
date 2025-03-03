@@ -98,22 +98,34 @@ const DashboardLayout = ({ children }) => {
                                 } py-2 space-y-2 bg-gray-100 rounded-b-xl dark:bg-gray-700`}
                             >
                                 <Link
-                                    href="/visa/view"
+                                    href="/create-visa-type-country-name"
                                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
                                 >
-                                    Create Visa Type & Country name
+                                    Create Visa-Type, Country-Name & others
                                 </Link>
                                 <Link
-                                    href="/visa/requirements"
+                                    href="#"
+                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                >
+                                    Visa Fees & Service Charges
+                                </Link>
+                                <Link
+                                    href="#"
                                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     Documents Requirements
                                 </Link>
                                 <Link
-                                    href="/visa/contacts"
+                                    href="#"
                                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     Important Contacts & Links
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                >
+                                    Sample Documents & Photos
                                 </Link>
                             </div>
                         </li>

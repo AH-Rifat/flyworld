@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VisaServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,4 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/change-password', function () {
         return inertia('Dashboard/ChangePassword');
     })->name('change-password');
+
+    Route::controller(VisaServiceController::class)->group(function () {
+        // all countries routes
+        Route::get('/create-visa-type-country-name', 'visaTypeCountryList')->name('create-visa-type-country-name');
+        Route::post('/create-country', 'createCountry')->name('create-country');
+        Route::put('/edit-country/{id}', 'editCountry')->name('edit-country');
+        Route::delete('/delete-country/{id}', 'deleteCountry')->name('delete-country');
+    });
 });
