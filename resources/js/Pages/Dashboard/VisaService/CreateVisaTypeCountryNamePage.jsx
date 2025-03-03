@@ -1,26 +1,28 @@
 import DashBoardLayout from "../../components/Dashboard/DashboardLayout";
 import CountrySection from "./CountrySection";
+import VisaTypeSection from "./VisaTypeSection";
 
-const CreateVisaTypeCountryNamePage = ({ countries }) => {
-
+const CreateVisaTypeCountryNamePage = ({ countries, visaTypes }) => {
     return (
         <DashBoardLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <CountrySection countiesData={countries} />
-                <div className="card p-4">
-                    <h2 className="card-title">Create Visa-type</h2>
-                </div>
+                <VisaTypeSection visaTypesData={visaTypes} />
                 <div className="card p-4">
                     <h2 className="card-title">Create Remarks</h2>
                 </div>
                 <div className="card p-4">
-                    <h2 className="card-title">Eligibility to Apply for Visa</h2>
+                    <h2 className="card-title">
+                        Eligibility to Apply for Visa
+                    </h2>
                 </div>
                 <div className="card p-4">
                     <h2 className="card-title">Processing Time</h2>
                 </div>
                 <div className="card p-4">
-                    <h2 className="card-title">Before Departure Requirements</h2>
+                    <h2 className="card-title">
+                        Before Departure Requirements
+                    </h2>
                 </div>
             </div>
         </DashBoardLayout>

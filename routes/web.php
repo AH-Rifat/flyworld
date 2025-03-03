@@ -34,9 +34,15 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(VisaServiceController::class)->group(function () {
         // all countries routes
+        Route::get('/get-all-countries', 'getAllCountryData')->name('get-all-countries');
         Route::get('/create-visa-type-country-name', 'visaTypeCountryList')->name('create-visa-type-country-name');
         Route::post('/create-country', 'createCountry')->name('create-country');
         Route::put('/edit-country/{id}', 'editCountry')->name('edit-country');
         Route::delete('/delete-country/{id}', 'deleteCountry')->name('delete-country');
+
+        // all visas type routes
+        Route::post('/create-visa-type', 'createVisaType')->name('create-visa-type');
+        Route::put('/edit-visa-type/{id}', 'editVisaType')->name('edit-visa-type');
+        Route::delete('/delete-visa-type/{id}', 'deleteVisaType')->name('delete-visa-type');
     });
 });

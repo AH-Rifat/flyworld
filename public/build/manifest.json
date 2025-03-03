@@ -80,12 +80,12 @@
     "src": "public/assets/img/soap-icon-plane.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-WgS1m13M.css",
+    "file": "assets/app-BS7Ki3GM.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CUur4DXQ.js",
+    "file": "assets/app-YuB0BMOb.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
