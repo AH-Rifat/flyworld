@@ -16,10 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@admin.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+        ]);
+        User::factory()->create([
+            'name' => 'Fly World BD',
+            'email' => 'flyworldbd30@gmail.com',
+        ]);
 
         // for ($i = 0; $i < 15; $i++) {
         //     Country::create([

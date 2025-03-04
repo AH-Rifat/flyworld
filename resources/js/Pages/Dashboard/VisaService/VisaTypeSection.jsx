@@ -26,6 +26,7 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
     const addVisaType = (e) => {
         e.preventDefault();
         post("/create-visa-type", {
+            preserveScroll: true,
             onSuccess: () => {
                 setData("country_id", "");
                 toast.success("VisaType added");
@@ -41,6 +42,7 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
         e.preventDefault();
 
         put(`/edit-visa-type/${editId}`, {
+            preserveScroll: true,
             onSuccess: () => {
                 toast.success("VisaType edited");
                 setIsEdit(false);
@@ -66,6 +68,9 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
                         onChange={(e) => setData("country_id", e.target.value)}
                         value={data.country_id}
                     />
+                    {errors.country_id && (
+                        <p className="text-red-500">{errors.country_id}</p>
+                    )}
 
                     <InputField
                         type="text"
@@ -73,6 +78,9 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
                         value={data.visa_type}
                         onChange={(e) => setData("visa_type", e.target.value)}
                     />
+                    {errors.visa_type && (
+                        <p className="text-red-500">{errors.visa_type}</p>
+                    )}
 
                     <textarea
                         rows={6}
@@ -83,6 +91,11 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
                             setData("visa_description", e.target.value)
                         }
                     ></textarea>
+                    {errors.visa_description && (
+                        <p className="text-red-500">
+                            {errors.visa_description}
+                        </p>
+                    )}
 
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>

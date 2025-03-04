@@ -8,6 +8,7 @@ const VisaTypeTable = ({ data, onEdit }) => {
     const onDelete = (id) => {
         if (confirm("Are you sure you want to delete this visa-type?")) {
             router.delete(`/delete-visa-type/${id}`, {
+                preserveScroll: true,
                 onSuccess: () => {
                     toast.success("Visa-type deleted");
                 },
@@ -48,7 +49,7 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                     colSpan="3"
                                     className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900"
                                 >
-                                    No countries found
+                                    No visa-type found
                                 </td>
                             </tr>
                         ) : (

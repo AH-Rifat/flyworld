@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('visa_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('country_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('visa_type');
             $table->text('visa_description');
             $table->timestamps();
