@@ -1,30 +1,19 @@
 import { Link, router } from "@inertiajs/react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { usePage } from "@inertiajs/react";
 
-const CountryTable = ({ data, onEdit }) => {
-    const { errors } = usePage().props;
+const RemarksTable = ({ data, onEdit }) => {
+    const [isReadMore, setIsReadMore] = useState(false);
 
     const onDelete = (id) => {
-        if (confirm("Are you sure you want to delete this country?")) {
-            router.delete(`/delete-country/${id}`, {
+        if (confirm("Are you sure you want to delete this remarks?")) {
+            router.delete(`/delete-remarks/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Country deleted", {
-                        position: "top-center",
-                    });
+                    toast.success("Remarks deleted");
                 },
                 onError: () => {
-                    errors.error
-                        ? toast.error(errors.error, {
-                              position: "top-center",
-                          })
-                        : toast.error(
-                              "Something went wrong. Please try again.",
-                              {
-                                  position: "top-center",
-                              }
-                          );
+                    toast.error("Something went wrong");
                 },
             });
         }
@@ -40,7 +29,7 @@ const CountryTable = ({ data, onEdit }) => {
                                 ID
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                                Country Name
+                                Remarks
                             </th>
                             <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">
                                 Actions
@@ -48,17 +37,17 @@ const CountryTable = ({ data, onEdit }) => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {data.data.length === 0 ? (
+                        {data?.data?.length === 0 ? (
                             <tr>
                                 <td
                                     colSpan="3"
                                     className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900"
                                 >
-                                    No countries found
+                                    No remarks found
                                 </td>
                             </tr>
                         ) : (
-                            data.data.map((item, index) => (
+                            data?.data?.map((item, index) => (
                                 <tr
                                     key={item.id}
                                     className="bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800"
@@ -67,7 +56,23 @@ const CountryTable = ({ data, onEdit }) => {
                                         {index + 1}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {item.country_name}
+                                        {isReadMore
+                                            ? item.remarks
+                                            : item.remarks.slice(0, 50)}
+                                        {item.remarks.length > 50 && (
+                                            <button
+                                                onClick={() =>
+                                                    setIsReadMore(!isReadMore)
+                                                }
+                                                className="px-2 py-1 text-sm font-medium bg-sky-500/10 text-sky-700
+                                               rounded-md hover:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500/20
+                                               transition-colors"
+                                            >
+                                                {isReadMore
+                                                    ? "Show Less"
+                                                    : "Read More"}
+                                            </button>
+                                        )}
                                     </td>
                                     <td className="px-4 py-3.5">
                                         <div className="flex items-center justify-center gap-2">
@@ -135,4 +140,4 @@ const CountryTable = ({ data, onEdit }) => {
     );
 };
 
-export default CountryTable;
+export default RemarksTable;

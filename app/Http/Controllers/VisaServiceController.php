@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Remark;
 use App\Models\VisaType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Throwable;
 
 class VisaServiceController extends Controller
 {
@@ -13,7 +15,8 @@ class VisaServiceController extends Controller
     {
         $countries = Country::latest()->select('id', 'country_name')->paginate(10);
         $visaTypes = VisaType::with('country')->latest()->select('id', 'country_id', 'visa_type', 'visa_description')->paginate(10);
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes'));
+        $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks'));
     }
 
     public function createCountry(Request $request)
@@ -37,7 +40,15 @@ class VisaServiceController extends Controller
 
     public function deleteCountry($id)
     {
-        Country::find($id)->delete();
+        try {
+            Country::find($id)->delete();
+        } catch (Throwable $th) {
+            if ($th->getCode() == 23000) {
+                return redirect()->back()->withErrors([
+                    'error' => 'This country has been used in another table'
+                ]);
+            }
+        }
         return redirect()->back();
     }
 
@@ -78,6 +89,35 @@ class VisaServiceController extends Controller
     public function deleteVisaType($id)
     {
         VisaType::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // visa remarks sections
+
+    public function createRemarks(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'remarks' => ['required'],
+        ]);
+        Remark::create($validation);
+        return redirect()->back();
+    }
+
+    public function editRemarks(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'remarks' => ['required'],
+        ]);
+        $remark = Remark::find($id);
+        $remark->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteRemarks($id)
+    {
+        Remark::find($id)->delete();
         return redirect()->back();
     }
 }
