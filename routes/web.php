@@ -49,5 +49,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-remarks', 'createRemarks')->name('create-remarks');
         Route::put('/edit-remarks/{id}', 'editRemarks')->name('edit-remarks');
         Route::delete('/delete-remarks/{id}', 'deleteRemarks')->name('delete-remarks');
+
+        // all Eligibility to Apply for Visa routes
+        Route::post('/create-eligibility', 'createEligibility')->name('create-eligibility');
+        Route::put('/edit-eligibility/{id}', 'editEligibility')->name('edit-eligibility');
+        Route::delete('/delete-eligibility/{id}', 'deleteEligibility')->name('delete-eligibility');
     });
 });
