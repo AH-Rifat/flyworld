@@ -2,6 +2,7 @@ import DashBoardLayout from "../../components/Dashboard/DashboardLayout";
 import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "./CreateEligibilitySection";
 import CreateRemarks from "./CreateRemarks";
+import VisaProcessingTimeSection from "./VisaProcessingTimeSection";
 import VisaTypeSection from "./VisaTypeSection";
 
 const CreateVisaTypeCountryNamePage = ({
@@ -9,6 +10,7 @@ const CreateVisaTypeCountryNamePage = ({
     visaTypes,
     remarks,
     eligibilitys,
+    visaProcessingTimes,
 }) => {
     return (
         <DashBoardLayout>
@@ -17,9 +19,7 @@ const CreateVisaTypeCountryNamePage = ({
                 <VisaTypeSection visaTypesData={visaTypes} />
                 <CreateRemarks remarksData={remarks} />
                 <CreateEligibilitySection eligibilitysData={eligibilitys} />
-                <div className="card p-4">
-                    <h2 className="card-title">Processing Time</h2>
-                </div>
+                <VisaProcessingTimeSection visaProcessingTimesData={visaProcessingTimes} />
                 <div className="card p-4">
                     <h2 className="card-title">
                         Before Departure Requirements

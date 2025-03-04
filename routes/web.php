@@ -54,5 +54,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-eligibility', 'createEligibility')->name('create-eligibility');
         Route::put('/edit-eligibility/{id}', 'editEligibility')->name('edit-eligibility');
         Route::delete('/delete-eligibility/{id}', 'deleteEligibility')->name('delete-eligibility');
+
+        // all visa processing time routes
+        Route::post('/create-visa-processing-time', 'createVisaProcessingTime')->name('create-visa-processing-time');
+        Route::put('/edit-visa-processing-time/{id}', 'editVisaProcessingTime')->name('edit-visa-processing-time');
+        Route::delete('/delete-visa-processing-time/{id}', 'deleteVisaProcessingTime')->name('delete-visa-processing-time');
     });
 });

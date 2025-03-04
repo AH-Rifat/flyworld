@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Eligibility;
 use App\Models\Remark;
+use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,7 +19,8 @@ class VisaServiceController extends Controller
         $visaTypes = VisaType::with('country')->latest()->select('id', 'country_id', 'visa_type', 'visa_description')->paginate(10);
         $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys'));
+        $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes'));
     }
 
     public function createCountry(Request $request)
@@ -149,6 +151,35 @@ class VisaServiceController extends Controller
     public function deleteEligibility($id)
     {
         Eligibility::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // visa processing time sections
+
+    public function createVisaProcessingTime(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'processing_time' => ['required'],
+        ]);
+        VisaProcessingTime::create($validation);
+        return redirect()->back();
+    }
+
+    public function editVisaProcessingTime(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'processing_time' => ['required'],
+        ]);
+        $visaProcessingTime = VisaProcessingTime::find($id);
+        $visaProcessingTime->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteVisaProcessingTime($id)
+    {
+        VisaProcessingTime::find($id)->delete();
         return redirect()->back();
     }
 }
