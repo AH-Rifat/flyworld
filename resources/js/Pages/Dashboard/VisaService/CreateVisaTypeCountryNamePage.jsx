@@ -1,4 +1,5 @@
 import DashBoardLayout from "../../components/Dashboard/DashboardLayout";
+import BeforeDepartureRequirementsSection from "./BeforeDepartureRequirementsSection";
 import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "./CreateEligibilitySection";
 import CreateRemarks from "./CreateRemarks";
@@ -11,19 +12,26 @@ const CreateVisaTypeCountryNamePage = ({
     remarks,
     eligibilitys,
     visaProcessingTimes,
+    beforeDepartureRequirements,
 }) => {
     return (
         <DashBoardLayout>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <CountrySection countiesData={countries} />
-                <VisaTypeSection visaTypesData={visaTypes} />
-                <CreateRemarks remarksData={remarks} />
-                <CreateEligibilitySection eligibilitysData={eligibilitys} />
-                <VisaProcessingTimeSection visaProcessingTimesData={visaProcessingTimes} />
-                <div className="card p-4">
-                    <h2 className="card-title">
-                        Before Departure Requirements
-                    </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-10">
+                    <CountrySection countiesData={countries} />
+                    <CreateRemarks remarksData={remarks} />
+                    <VisaProcessingTimeSection
+                        visaProcessingTimesData={visaProcessingTimes}
+                    />
+                </div>
+                <div className="flex flex-col gap-10">
+                    <VisaTypeSection visaTypesData={visaTypes} />
+                    <CreateEligibilitySection eligibilitysData={eligibilitys} />
+                    <BeforeDepartureRequirementsSection
+                        beforeDepartureRequirementsData={
+                            beforeDepartureRequirements
+                        }
+                    />
                 </div>
             </div>
         </DashBoardLayout>

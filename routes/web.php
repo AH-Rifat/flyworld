@@ -59,5 +59,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-visa-processing-time', 'createVisaProcessingTime')->name('create-visa-processing-time');
         Route::put('/edit-visa-processing-time/{id}', 'editVisaProcessingTime')->name('edit-visa-processing-time');
         Route::delete('/delete-visa-processing-time/{id}', 'deleteVisaProcessingTime')->name('delete-visa-processing-time');
+
+        // all before departure requirements routes
+        Route::post('/create-before-departure-requirements', 'createBeforeDepartureRequirements')->name('create-before-departure-requirements');
+        Route::put('/edit-before-departure-requirements/{id}', 'editBeforeDepartureRequirements')->name('edit-before-departure-requirements');
+        Route::delete('/delete-before-departure-requirements/{id}', 'deleteBeforeDepartureRequirements')->name('delete-before-departure-requirements');
+        
     });
 });

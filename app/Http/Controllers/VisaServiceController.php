@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeforeDepartureRequirements;
 use App\Models\Country;
 use App\Models\Eligibility;
 use App\Models\Remark;
@@ -20,7 +21,8 @@ class VisaServiceController extends Controller
         $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes'));
+        $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements'));
     }
 
     public function createCountry(Request $request)
@@ -180,6 +182,35 @@ class VisaServiceController extends Controller
     public function deleteVisaProcessingTime($id)
     {
         VisaProcessingTime::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // before departure requirements sections
+
+    public function createBeforeDepartureRequirements(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'before_departure_requirements' => ['required'],
+        ]);
+        BeforeDepartureRequirements::create($validation);
+        return redirect()->back();
+    }
+
+    public function editBeforeDepartureRequirements(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'before_departure_requirements' => ['required'],
+        ]);
+        $beforeDepartureRequirements = BeforeDepartureRequirements::find($id);
+        $beforeDepartureRequirements->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteBeforeDepartureRequirements($id)
+    {
+        BeforeDepartureRequirements::find($id)->delete();
         return redirect()->back();
     }
 }
