@@ -68,7 +68,15 @@ const DashboardLayout = ({ children }) => {
                         <li>
                             <button
                                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                className={`flex items-center w-full p-2 ${
+                                    url === "/create-visa-type-country-name"
+                                        ? "bg-gray-300"
+                                        : "" ||
+                                          url ===
+                                              "/get-sample-documents-and-photos"
+                                        ? "bg-gray-300"
+                                        : ""
+                                } text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
                             >
                                 <FaCcVisa />
                                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
@@ -99,7 +107,11 @@ const DashboardLayout = ({ children }) => {
                             >
                                 <Link
                                     href="/create-visa-type-country-name"
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                    className={`flex items-center w-full p-2 ${
+                                        url === "/create-visa-type-country-name"
+                                            ? "bg-gray-300"
+                                            : ""
+                                    } text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Create Visa-Type, Country-Name & others
                                 </Link>
@@ -116,8 +128,13 @@ const DashboardLayout = ({ children }) => {
                                     Important Contacts & Links
                                 </Link>
                                 <Link
-                                    href="#"
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                    href="/get-sample-documents-and-photos"
+                                    className={`flex items-center w-full p-2 ${
+                                        url ===
+                                        "/get-sample-documents-and-photos"
+                                            ? "bg-gray-300"
+                                            : ""
+                                    } text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Sample Documents & Photos
                                 </Link>

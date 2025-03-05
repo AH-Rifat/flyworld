@@ -2,13 +2,11 @@ import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import InputField from "../../components/ui/InputField";
 import Button from "../../components/ui/Button";
-import SelectCountryList from "../../components/SelectCountryList";
 import { toast } from "react-toastify";
 import VisaTypeTable from "./Tables/VisaTypeTable";
 
 const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
-        country_id: "",
         visa_type: "",
         visa_description: "",
     });
@@ -17,7 +15,6 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
 
     const onEdit = (item) => {
         setIsEdit(true);
-        setData("country_id", item.country_id);
         setData("visa_type", item.visa_type);
         setData("visa_description", item.visa_description);
         setEditId(item.id);
@@ -28,14 +25,14 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
         post("/create-visa-type", {
             preserveScroll: true,
             onSuccess: () => {
-                setData("country_id", "");
                 toast.success("VisaType added");
                 reset();
             },
-            onError: () =>
+            onError: () => {
                 toast.error("Something went wrong", {
                     position: "top-center",
-                }),
+                });
+            },
         });
     };
     const editVisaType = (e) => {
@@ -47,7 +44,6 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
                 toast.success("VisaType edited");
                 setIsEdit(false);
                 reset();
-                setData("country_id", "");
             },
             onError: () =>
                 toast.error("Something went wrong", {
@@ -64,14 +60,6 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
                     onSubmit={isEdit ? editVisaType : addVisaType}
                     className="flex flex-col gap-4 mb-4"
                 >
-                    <SelectCountryList
-                        onChange={(e) => setData("country_id", e.target.value)}
-                        value={data.country_id}
-                    />
-                    {errors.country_id && (
-                        <p className="text-red-500">{errors.country_id}</p>
-                    )}
-
                     <InputField
                         type="text"
                         placeholder="VisaType Name"
@@ -99,7 +87,7 @@ const VisaTypeSection = ({ visaTypesData: visaTypes }) => {
 
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit VisaType Name" : "Add VisaType"}
+                            {isEdit ? "Edit VisaType" : "Add VisaType"}
                         </Button>
                     </div>
                 </form>

@@ -1,7 +1,7 @@
 import { usePage } from "@inertiajs/react";
 
 const SelectCountryList = ({ onChange, ...props }) => {
-    const { countries } = usePage().props;
+    const { allCountries } = usePage().props;
 
     return (
         <>
@@ -13,7 +13,7 @@ const SelectCountryList = ({ onChange, ...props }) => {
                 <option value="" className="hover:text-sky-400">
                     Select Country
                 </option>
-                {countries.data.map((country) => (
+                {allCountries?.map((country) => (
                     <option key={country.id} value={country.id}>
                         {country.country_name}
                     </option>

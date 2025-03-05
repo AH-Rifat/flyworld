@@ -29,9 +29,6 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                 ID
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                                Country Name
-                            </th>
-                            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                 Visa Type
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
@@ -46,10 +43,10 @@ const VisaTypeTable = ({ data, onEdit }) => {
                         {data.data.length === 0 ? (
                             <tr>
                                 <td
-                                    colSpan="3"
+                                    colSpan="4"
                                     className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900"
                                 >
-                                    No visa-type found
+                                    No data found
                                 </td>
                             </tr>
                         ) : (
@@ -60,9 +57,6 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                 >
                                     <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
                                         {index + 1}
-                                    </td>
-                                    <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {item.country.country_name}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {item.visa_type}

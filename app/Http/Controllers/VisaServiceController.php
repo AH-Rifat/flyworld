@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Eligibility;
 use App\Models\FeeAndServiceCharges;
 use App\Models\Remark;
+use App\Models\SampleDocumentsAndPhotos;
 use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
 use Illuminate\Http\Request;
@@ -17,15 +18,16 @@ class VisaServiceController extends Controller
 {
     public function visaTypeCountryList()
     {
+        $allCountries = Country::latest()->select('id', 'country_name')->get();
         $countries = Country::latest()->select('id', 'country_name')->paginate(10);
-        $visaTypes = VisaType::with('country')->latest()->select('id', 'country_id', 'visa_type', 'visa_description')->paginate(10);
+        $visaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->paginate(10);
         $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
         $feeAndServiceCharges = FeeAndServiceCharges::with('country')->latest()->select('id', 'country_id', 'fee_and_service_charges')->paginate(10);
 
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
     }
 
     public function createCountry(Request $request)
@@ -74,8 +76,7 @@ class VisaServiceController extends Controller
     public function createVisaType(Request $request)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
-            'visa_type' => ['required'],
+            'visa_type' => ['required', 'unique:visa_types,visa_type'],
             'visa_description' => ['required'],
         ]);
 
@@ -86,7 +87,6 @@ class VisaServiceController extends Controller
     public function editVisaType(Request $request, $id)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
             'visa_type' => ['required'],
             'visa_description' => ['required'],
         ]);
@@ -243,6 +243,42 @@ class VisaServiceController extends Controller
     public function deleteFeeAndServiceCharges($id)
     {
         FeeAndServiceCharges::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // sample documents and photo sections
+
+    public function getSampleDocumentsAndPhotos()
+    {
+        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries'));
+    }
+
+    public function createSampleDocumentsAndPhotos(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'sample_documents_and_photos' => ['required'],
+        ]);
+        SampleDocumentsAndPhotos::create($validation);
+        return redirect()->back();
+    }
+
+    public function editSampleDocumentsAndPhotos(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'sample_documents_and_photos' => ['required'],
+        ]);
+        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::find($id);
+        $sampleDocumentsAndPhotos->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteSampleDocumentsAndPhotos($id)
+    {
+        SampleDocumentsAndPhotos::find($id)->delete();
         return redirect()->back();
     }
 }
