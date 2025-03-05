@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-before-departure-requirements', 'createBeforeDepartureRequirements')->name('create-before-departure-requirements');
         Route::put('/edit-before-departure-requirements/{id}', 'editBeforeDepartureRequirements')->name('edit-before-departure-requirements');
         Route::delete('/delete-before-departure-requirements/{id}', 'deleteBeforeDepartureRequirements')->name('delete-before-departure-requirements');
-        
+
+        // all visa fees and service charges routes
+        Route::post('/create-fee-and-service-charges', 'createFeeAndServiceCharges')->name('create-fee-and-service-charges');
+        Route::put('/edit-fee-and-service-charges/{id}', 'editFeeAndServiceCharges')->name('edit-fee-and-service-charges');
+        Route::delete('/delete-fee-and-service-charges/{id}', 'deleteFeeAndServiceCharges')->name('delete-fee-and-service-charges');
     });
 });

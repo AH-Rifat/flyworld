@@ -1,16 +1,14 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
-import { toast } from "react-toastify";
-import SelectCountryList from "../../components/SelectCountryList";
 import Button from "../../components/ui/Button";
-import BeforeDepartureRequirementsTable from "./Tables/BeforeDepartureRequirementsTable";
+import SelectCountryList from "../../components/SelectCountryList";
+import VisaFeesServiceChargesTable from "./Tables/VisaFeesServiceChargesTable";
+import { toast } from "react-toastify";
 
-const BeforeDepartureRequirementsSection = ({
-    beforeDepartureRequirementsData,
-}) => {
+const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
         country_id: "",
-        before_departure_requirements: "",
+        fee_and_service_charges: "",
     });
 
     const [isEdit, setIsEdit] = useState(false);
@@ -18,10 +16,10 @@ const BeforeDepartureRequirementsSection = ({
 
     const addSubmit = (e) => {
         e.preventDefault();
-        post("/create-before-departure-requirements", {
+        post("/create-fee-and-service-charges", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Before Departure Requirements added");
+                toast.success("Visa Fees and Service Charges added");
                 reset();
             },
             onError: () =>
@@ -33,10 +31,10 @@ const BeforeDepartureRequirementsSection = ({
 
     const editSubmit = (e) => {
         e.preventDefault();
-        put(`/edit-before-departure-requirements/${editId}`, {
+        put(`/edit-fee-and-service-charges/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Before Departure Requirements edited");
+                toast.success("Visa Fees and Service Charges edited");
                 setIsEdit(false);
                 reset();
             },
@@ -48,19 +46,16 @@ const BeforeDepartureRequirementsSection = ({
     };
 
     const onEdit = (item) => {
-        setData("country_id", item.country_id);
-        setData(
-            "before_departure_requirements",
-            item.before_departure_requirements
-        );
         setIsEdit(true);
         setEditId(item.id);
+        setData("country_id", item.country_id);
+        setData("fee_and_service_charges", item.fee_and_service_charges);
     };
 
     return (
         <>
             <div className="card p-4">
-                <h2 className="card-title">Before Departure Requirements</h2>
+                <h2 className="card-title">Visa Fees and Service Charges</h2>
                 <form
                     onSubmit={isEdit ? editSubmit : addSubmit}
                     className="flex flex-col gap-4 mb-4"
@@ -76,18 +71,18 @@ const BeforeDepartureRequirementsSection = ({
                         <textarea
                             rows={6}
                             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
-                            placeholder="Write Before Departure Requirements here..."
-                            value={data.before_departure_requirements}
+                            placeholder="Write Visa Fees and Service Charges here..."
+                            value={data.fee_and_service_charges}
                             onChange={(e) =>
                                 setData(
-                                    "before_departure_requirements",
+                                    "fee_and_service_charges",
                                     e.target.value
                                 )
                             }
                         ></textarea>
-                        {errors.before_departure_requirements && (
+                        {errors.fee_and_service_charges && (
                             <p className="text-red-600">
-                                {errors.before_departure_requirements}
+                                {errors.fee_and_service_charges}
                             </p>
                         )}
                     </div>
@@ -97,8 +92,9 @@ const BeforeDepartureRequirementsSection = ({
                         </Button>
                     </div>
                 </form>
-                <BeforeDepartureRequirementsTable
-                    data={beforeDepartureRequirementsData}
+
+                <VisaFeesServiceChargesTable
+                    data={feeAndServiceChargesData}
                     onEdit={onEdit}
                 />
             </div>
@@ -106,4 +102,4 @@ const BeforeDepartureRequirementsSection = ({
     );
 };
 
-export default BeforeDepartureRequirementsSection;
+export default VisaFeesServiceChargesSection;

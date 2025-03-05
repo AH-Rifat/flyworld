@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BeforeDepartureRequirements;
 use App\Models\Country;
 use App\Models\Eligibility;
+use App\Models\FeeAndServiceCharges;
 use App\Models\Remark;
 use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
@@ -22,7 +23,9 @@ class VisaServiceController extends Controller
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements'));
+        $feeAndServiceCharges = FeeAndServiceCharges::with('country')->latest()->select('id', 'country_id', 'fee_and_service_charges')->paginate(10);
+
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
     }
 
     public function createCountry(Request $request)
@@ -211,6 +214,35 @@ class VisaServiceController extends Controller
     public function deleteBeforeDepartureRequirements($id)
     {
         BeforeDepartureRequirements::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // visa fees and service charges sections
+
+    public function createFeeAndServiceCharges(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'fee_and_service_charges' => ['required'],
+        ]);
+        FeeAndServiceCharges::create($validation);
+        return redirect()->back();
+    }
+
+    public function editFeeAndServiceCharges(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'fee_and_service_charges' => ['required'],
+        ]);
+        $feeAndServiceCharges = FeeAndServiceCharges::find($id);
+        $feeAndServiceCharges->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteFeeAndServiceCharges($id)
+    {
+        FeeAndServiceCharges::find($id)->delete();
         return redirect()->back();
     }
 }
