@@ -14,7 +14,6 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         post("/login", { onSuccess: () => reset() });
-        console.log(data);
     };
 
     return (

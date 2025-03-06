@@ -11,6 +11,7 @@ use App\Models\SampleDocumentsAndPhotos;
 use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Throwable;
 
@@ -251,34 +252,47 @@ class VisaServiceController extends Controller
     public function getSampleDocumentsAndPhotos()
     {
         $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
         $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
-        return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries'));
+        return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries', 'allVisaTypes'));
     }
 
     public function createSampleDocumentsAndPhotos(Request $request)
     {
-        $validation = $request->validate([
-            'country_id' => ['required'],
-            'sample_documents_and_photos' => ['required'],
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // 2MB max
         ]);
-        SampleDocumentsAndPhotos::create($validation);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads/sample-documents', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        SampleDocumentsAndPhotos::create($validated);
+
         return redirect()->back();
     }
 
-    public function editSampleDocumentsAndPhotos(Request $request, $id)
-    {
-        $validation = $request->validate([
-            'country_id' => ['required'],
-            'sample_documents_and_photos' => ['required'],
-        ]);
-        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::find($id);
-        $sampleDocumentsAndPhotos->update($validation);
-        return redirect()->back();
+    public function editSampleDocumentsAndPhotos(Request $request, $id) {
+        // TODO : Edit Sample Documents and Photos
     }
+
+
+
+
 
     public function deleteSampleDocumentsAndPhotos($id)
     {
-        SampleDocumentsAndPhotos::find($id)->delete();
+        $document = SampleDocumentsAndPhotos::findOrFail($id);
+
+        if (Storage::disk('public')->exists($document->image)) {
+            Storage::disk('public')->delete($document->image);
+        }
+
+        $document->delete();
         return redirect()->back();
     }
 }

@@ -69,5 +69,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-fee-and-service-charges', 'createFeeAndServiceCharges')->name('create-fee-and-service-charges');
         Route::put('/edit-fee-and-service-charges/{id}', 'editFeeAndServiceCharges')->name('edit-fee-and-service-charges');
         Route::delete('/delete-fee-and-service-charges/{id}', 'deleteFeeAndServiceCharges')->name('delete-fee-and-service-charges');
+
+        //sample documents and photo section routes
+        Route::get('/get-sample-documents-and-photos', 'getSampleDocumentsAndPhotos')->name('sample-documents-and-photos');
+        Route::post('/create-sample-documents-and-photos', 'createSampleDocumentsAndPhotos')->name('create-sample-documents-and-photos');
+        Route::put('/edit-sample-documents-and-photos/{id}', 'editSampleDocumentsAndPhotos')->name('edit-sample-documents-and-photos');
+        Route::delete('/delete-sample-documents-and-photos/{id}', 'deleteSampleDocumentsAndPhotos')->name('delete-sample-documents-and-photos');
+
     });
 });
