@@ -76,5 +76,10 @@ Route::middleware('auth')->group(function () {
         Route::put('/edit-sample-documents-and-photos/{id}', 'editSampleDocumentsAndPhotos')->name('edit-sample-documents-and-photos');
         Route::delete('/delete-sample-documents-and-photos/{id}', 'deleteSampleDocumentsAndPhotos')->name('delete-sample-documents-and-photos');
 
+        // Important contact and links routes
+        Route::get('/get-important-contact-and-links', 'getImportantContactAndLinks')->name('get-important-contact-and-links');
+        Route::post('/create-important-contact-and-links', 'createImportantContactAndLinks')->name('create-important-contact-and-links');
+        Route::put('/edit-important-contact-and-links/{id}', 'editImportantContactAndLinks')->name('edit-important-contact-and-links');
+        Route::delete('/delete-important-contact-and-links/{id}', 'deleteImportantContactAndLinks')->name('delete-important-contact-and-links');
     });
 });

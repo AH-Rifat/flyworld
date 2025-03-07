@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }) => {
     const [dropdownOpen1, setDropdownOpen1] = useState(false);
 
     const { auth } = usePage().props;
-    const { url, component } = usePage();
+    const { url } = usePage();
 
     return (
         <div className="h-screen bg-gray-50 dark:bg-gray-900">
@@ -69,11 +69,10 @@ const DashboardLayout = ({ children }) => {
                             <button
                                 onClick={() => setDropdownOpen(!dropdownOpen)}
                                 className={`flex items-center w-full p-2 ${
-                                    url === "/create-visa-type-country-name"
-                                        ? "bg-gray-300"
-                                        : "" ||
-                                          url ===
-                                              "/get-sample-documents-and-photos"
+                                    url === "/create-visa-type-country-name" ||
+                                    url ===
+                                        "/get-important-contact-and-links" ||
+                                    url === "/get-sample-documents-and-photos"
                                         ? "bg-gray-300"
                                         : ""
                                 } text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
@@ -122,8 +121,13 @@ const DashboardLayout = ({ children }) => {
                                     Documents Requirements
                                 </Link>
                                 <Link
-                                    href="#"
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                    href="/get-important-contact-and-links"
+                                    className={`flex items-center w-full p-2 ${
+                                        url ===
+                                        "/get-important-contact-and-links"
+                                            ? "bg-gray-300"
+                                            : ""
+                                    } text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Important Contacts & Links
                                 </Link>

@@ -6,6 +6,7 @@ use App\Models\BeforeDepartureRequirements;
 use App\Models\Country;
 use App\Models\Eligibility;
 use App\Models\FeeAndServiceCharges;
+use App\Models\ImportantContactAndLink;
 use App\Models\Remark;
 use App\Models\SampleDocumentsAndPhotos;
 use App\Models\VisaProcessingTime;
@@ -276,7 +277,8 @@ class VisaServiceController extends Controller
         return redirect()->back();
     }
 
-    public function editSampleDocumentsAndPhotos(Request $request, $id) {
+    public function editSampleDocumentsAndPhotos(Request $request, $id)
+    {
         // TODO : Edit Sample Documents and Photos
     }
 
@@ -293,6 +295,57 @@ class VisaServiceController extends Controller
         }
 
         $document->delete();
+        return redirect()->back();
+    }
+
+    // Important contact and links sections
+
+    public function getImportantContactAndLinks()
+    {
+        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
+        $importantContactAndLinks = ImportantContactAndLink::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/ImportantContactAndLinks/ImportantContactSection', compact('importantContactAndLinks', 'allCountries', 'allVisaTypes'));
+    }
+
+    public function createImportantContactAndLinks(Request $request)
+    {
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => ['required', 'numeric','digits:11'],
+            'office_hours' => 'nullable|string|max:255',
+        ]);
+
+        ImportantContactAndLink::create($validated);
+
+        return redirect()->back();
+    }
+
+    public function editImportantContactAndLinks(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => ['required', 'numeric', 'digits:11'],
+            'office_hours' => 'nullable|string|max:255',
+        ]);
+
+        $importantContactAndLink = ImportantContactAndLink::find($id);
+        $importantContactAndLink->update($validated);
+
+        return redirect()->back();
+    }
+
+    public function deleteImportantContactAndLinks($id)
+    {
+        ImportantContactAndLink::find($id)->delete();
         return redirect()->back();
     }
 }
