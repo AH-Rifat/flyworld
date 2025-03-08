@@ -100,7 +100,15 @@ class VisaServiceController extends Controller
 
     public function deleteVisaType($id)
     {
-        VisaType::find($id)->delete();
+        try {
+            VisaType::find($id)->delete();
+        } catch (Throwable $th) {
+            if ($th->getCode() == 23000) {
+                return redirect()->back()->withErrors([
+                    'error' => 'This visa type has been used in another table'
+                ]);
+            }
+        }
         return redirect()->back();
     }
 

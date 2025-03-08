@@ -1,16 +1,29 @@
-import { Link, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
 const VisaTypeTable = ({ data, onEdit }) => {
+    const { errors } = usePage().props;
+
     const onDelete = (id) => {
         if (confirm("Are you sure you want to delete this visa-type?")) {
             router.delete(`/delete-visa-type/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Visa-type deleted");
+                    toast.success("Visa-type deleted", {
+                        position: "top-center",
+                    });
                 },
                 onError: () => {
-                    toast.error("Something went wrong");
+                    errors.error
+                        ? toast.error(errors.error, {
+                              position: "top-center",
+                          })
+                        : toast.error(
+                              "Something went wrong. Please try again.",
+                              {
+                                  position: "top-center",
+                              }
+                          );
                 },
             });
         }
