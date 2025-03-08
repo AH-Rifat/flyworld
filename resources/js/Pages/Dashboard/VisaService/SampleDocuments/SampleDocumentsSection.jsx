@@ -35,7 +35,16 @@ const SampleDocumentsSection = ({ sampleDocumentsAndPhotos }) => {
 
     const editSubmit = (e) => {
         e.preventDefault();
-        //  TODO: update sample documents and photos
+        post(`/update-sample-documents-and-photos/${editId}`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast.success("Sample Documents and Photos edited");
+                setIsEdit(false);
+                reset();
+                setImagePreview(null); // Reset image preview
+            },
+            onError: () => toast.error("Something went wrong"),
+        });
     };
 
     const onEdit = (item) => {

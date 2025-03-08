@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
         //sample documents and photo section routes
         Route::get('/get-sample-documents-and-photos', 'getSampleDocumentsAndPhotos')->name('sample-documents-and-photos');
         Route::post('/create-sample-documents-and-photos', 'createSampleDocumentsAndPhotos')->name('create-sample-documents-and-photos');
-        Route::put('/edit-sample-documents-and-photos/{id}', 'editSampleDocumentsAndPhotos')->name('edit-sample-documents-and-photos');
+        Route::post('/update-sample-documents-and-photos/{id}', 'editSampleDocumentsAndPhotos')->name('edit-sample-documents-and-photos');
         Route::delete('/delete-sample-documents-and-photos/{id}', 'deleteSampleDocumentsAndPhotos')->name('delete-sample-documents-and-photos');
 
         // Important contact and links routes

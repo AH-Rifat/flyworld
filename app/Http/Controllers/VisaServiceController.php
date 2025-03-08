@@ -279,12 +279,28 @@ class VisaServiceController extends Controller
 
     public function editSampleDocumentsAndPhotos(Request $request, $id)
     {
-        // TODO : Edit Sample Documents and Photos
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'image' => 'nullable||max:2048', // 2MB max
+        ]);
+
+        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::find($id);
+
+        if ($request->hasFile('image')) {
+            if (Storage::disk('public')->exists($sampleDocumentsAndPhotos['image'])) {
+                Storage::disk('public')->delete($sampleDocumentsAndPhotos['image']);
+            }
+
+            $imagePath = $request->file('image')->store('uploads/sample-documents', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        $sampleDocumentsAndPhotos->update($validated);
+
+        return redirect()->back();
     }
-
-
-
-
 
     public function deleteSampleDocumentsAndPhotos($id)
     {
@@ -316,7 +332,7 @@ class VisaServiceController extends Controller
             'title' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => ['required', 'numeric','digits:11'],
+            'phone' => ['required', 'numeric', 'digits:11'],
             'office_hours' => 'nullable|string|max:255',
         ]);
 
