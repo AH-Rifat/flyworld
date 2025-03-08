@@ -4,7 +4,7 @@ import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "../VisaService/Eligibility/CreateEligibilitySection";
 import CreateRemarks from "../VisaService/Remarks/CreateRemarks";
 import VisaFeesServiceChargesSection from "./VisaFeeServiceCharge/VisaFeesServiceChargesSection";
-import VisaProcessingTimeSection from "./VisaProcessingTimeSection";
+import VisaProcessingTimeSection from "./VisaProcessingTime/VisaProcessingTimeSection";
 import VisaTypeDiscriptionSection from "./VisaTypeDiscription/VisaTypeDiscriptionSection";
 import VisaTypeSection from "./VisaType/VisaTypeSection";
 

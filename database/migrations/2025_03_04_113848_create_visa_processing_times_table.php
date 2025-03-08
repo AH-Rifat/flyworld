@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('visa_processing_times', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('visa_type_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('processing_time');
             $table->timestamps();
         });

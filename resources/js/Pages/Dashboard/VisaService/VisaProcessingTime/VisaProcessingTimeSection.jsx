@@ -1,15 +1,18 @@
 import { useState } from "react";
-import SelectCountryList from "../../components/SelectCountryList";
-import Button from "../../components/ui/Button";
+import SelectCountryList from "../../../components/SelectCountryList";
+import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
+import Button from "../../../components/ui/Button";
+import TextariaField from "../../../components/ui/TextariaField";
 import { useForm } from "@inertiajs/react";
 import { toast } from "react-toastify";
-import VisaProcessingTimeTable from "./Tables/VisaProcessingTimeTable";
+import VisaProcessingTimeTable from "./VisaProcessingTimeTable";
 
 const VisaProcessingTimeSection = ({
     visaProcessingTimesData: visaProcessingTimes,
 }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
         country_id: "",
+        visa_type_id: "",
         processing_time: "",
     });
 
@@ -21,7 +24,9 @@ const VisaProcessingTimeSection = ({
         post("/create-visa-processing-time", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Visa Processing Time added");
+                toast.success("Visa Processing Time added", {
+                    position: "top-center",
+                });
                 reset();
             },
             onError: () =>
@@ -36,7 +41,9 @@ const VisaProcessingTimeSection = ({
         put(`/edit-visa-processing-time/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Visa Processing Time edited");
+                toast.success("Visa Processing Time edited", {
+                    position: "top-center",
+                });
                 setIsEdit(false);
                 reset();
             },
@@ -49,6 +56,7 @@ const VisaProcessingTimeSection = ({
 
     const onEdit = (item) => {
         setData("country_id", item.country_id);
+        setData("visa_type_id", item.visa_type_id);
         setData("processing_time", item.processing_time);
         setIsEdit(true);
         setEditId(item.id);
@@ -69,16 +77,23 @@ const VisaProcessingTimeSection = ({
                     {errors.country_id && (
                         <p className="text-red-600">{errors.country_id}</p>
                     )}
+                    <SelectVisaTypeList
+                        value={data.visa_type_id}
+                        onChange={(e) =>
+                            setData("visa_type_id", e.target.value)
+                        }
+                    />
+                    {errors.visa_type_id && (
+                        <p className="text-red-600">{errors.visa_type_id}</p>
+                    )}
                     <div className="flex-1/2">
-                        <textarea
-                            rows={6}
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                        <TextariaField
                             placeholder="Write Visa Processing Time here..."
                             value={data.processing_time}
                             onChange={(e) =>
                                 setData("processing_time", e.target.value)
                             }
-                        ></textarea>
+                        />
                         {errors.processing_time && (
                             <p className="text-red-600">
                                 {errors.processing_time}
@@ -87,7 +102,7 @@ const VisaProcessingTimeSection = ({
                     </div>
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit" : "Add"}
+                            {isEdit ? "Update" : "Add"}
                         </Button>
                     </div>
                 </form>
