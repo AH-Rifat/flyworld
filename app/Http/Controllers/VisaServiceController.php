@@ -26,7 +26,7 @@ class VisaServiceController extends Controller
         $countries = Country::latest()->select('id', 'country_name')->paginate(10);
         $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
         $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->latest()->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
-        $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
+        $remarks = Remark::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
@@ -148,8 +148,9 @@ class VisaServiceController extends Controller
     public function createRemarks(Request $request)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
-            'remarks' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
+            'remarks' => ['required', 'string'],
         ]);
         Remark::create($validation);
         return redirect()->back();
@@ -158,8 +159,9 @@ class VisaServiceController extends Controller
     public function editRemarks(Request $request, $id)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
-            'remarks' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
+            'remarks' => ['required', 'string'],
         ]);
         $remark = Remark::find($id);
         $remark->update($validation);

@@ -2,7 +2,7 @@ import DashBoardLayout from "../../components/Dashboard/DashboardLayout";
 import BeforeDepartureRequirementsSection from "./BeforeDepartureRequirementsSection";
 import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "./CreateEligibilitySection";
-import CreateRemarks from "./CreateRemarks";
+import CreateRemarks from "../VisaService/Remarks/CreateRemarks";
 import VisaFeesServiceChargesSection from "./VisaFeesServiceChargesSection";
 import VisaProcessingTimeSection from "./VisaProcessingTimeSection";
 import VisaTypeDiscriptionSection from "./VisaTypeDiscription/VisaTypeDiscriptionSection";
