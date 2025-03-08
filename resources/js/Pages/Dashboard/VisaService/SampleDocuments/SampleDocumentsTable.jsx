@@ -72,7 +72,7 @@ const SampleDocumentsTable = ({ data, onEdit }) => {
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
                                         <img
-                                            src={`/storage/${item.image}`}
+                                            src={`images/sample-documents/${item.image}`}
                                             alt={item.title}
                                             className="w-16 h-16 object-cover rounded-lg"
                                         />

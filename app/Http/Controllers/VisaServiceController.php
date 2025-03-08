@@ -268,8 +268,11 @@ class VisaServiceController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads/sample-documents', 'public');
-            $validated['image'] = $imagePath;
+            $image = $request->file('image');
+            $destinationPath = 'images/sample-documents/';
+            $documentImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $documentImage);
+            $validated['image'] = "$documentImage";
         }
 
         SampleDocumentsAndPhotos::create($validated);
@@ -286,18 +289,22 @@ class VisaServiceController extends Controller
             'image' => 'nullable||max:2048', // 2MB max
         ]);
 
-        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::find($id);
+        $document = SampleDocumentsAndPhotos::find($id);
 
         if ($request->hasFile('image')) {
-            if (Storage::disk('public')->exists($sampleDocumentsAndPhotos['image'])) {
-                Storage::disk('public')->delete($sampleDocumentsAndPhotos['image']);
+            $filePath = 'images/sample-documents/' . $document->image;
+            if (file_exists($filePath)) {
+                unlink($filePath);
             }
 
-            $imagePath = $request->file('image')->store('uploads/sample-documents', 'public');
-            $validated['image'] = $imagePath;
+            $image = $request->file('image');
+            $destinationPath = 'images/sample-documents/';
+            $documentImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $documentImage);
+            $validated['image'] = "$documentImage";
         }
 
-        $sampleDocumentsAndPhotos->update($validated);
+        $document->update($validated);
 
         return redirect()->back();
     }
@@ -306,8 +313,9 @@ class VisaServiceController extends Controller
     {
         $document = SampleDocumentsAndPhotos::findOrFail($id);
 
-        if (Storage::disk('public')->exists($document->image)) {
-            Storage::disk('public')->delete($document->image);
+        $filePath = 'images/sample-documents/' . $document->image;
+        if (file_exists($filePath)) {
+            unlink($filePath);
         }
 
         $document->delete();
