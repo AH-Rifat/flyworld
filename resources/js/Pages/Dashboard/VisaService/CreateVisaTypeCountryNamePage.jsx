@@ -5,11 +5,13 @@ import CreateEligibilitySection from "./CreateEligibilitySection";
 import CreateRemarks from "./CreateRemarks";
 import VisaFeesServiceChargesSection from "./VisaFeesServiceChargesSection";
 import VisaProcessingTimeSection from "./VisaProcessingTimeSection";
-import VisaTypeSection from "./VisaTypeSection";
+import VisaTypeDiscriptionSection from "./VisaTypeDiscription/VisaTypeDiscriptionSection";
+import VisaTypeSection from "./VisaType/VisaTypeSection";
 
 const CreateVisaTypeCountryNamePage = ({
     countries,
     visaTypes,
+    visaTypeDescriptions,
     remarks,
     eligibilitys,
     visaProcessingTimes,
@@ -31,6 +33,9 @@ const CreateVisaTypeCountryNamePage = ({
                 </div>
                 <div className="flex flex-col gap-10">
                     <VisaTypeSection visaTypesData={visaTypes} />
+                    <VisaTypeDiscriptionSection
+                        visaTypeDescriptionsData={visaTypeDescriptions}
+                    />
                     <CreateEligibilitySection eligibilitysData={eligibilitys} />
                     <BeforeDepartureRequirementsSection
                         beforeDepartureRequirementsData={

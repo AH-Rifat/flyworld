@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/edit-visa-type/{id}', 'editVisaType')->name('edit-visa-type');
         Route::delete('/delete-visa-type/{id}', 'deleteVisaType')->name('delete-visa-type');
 
+        // all visa type discription routes
+        Route::post('/create-visa-type-description', 'createVisaTypeDescription')->name('create-visa-type-description');
+        Route::put('/edit-visa-type-description/{id}', 'editVisaTypeDescription')->name('edit-visa-type-description');
+        Route::delete('/delete-visa-type-description/{id}', 'deleteVisaTypeDescription')->name('delete-visa-type-description');
+
         // all visa remarks routes
         Route::post('/create-remarks', 'createRemarks')->name('create-remarks');
         Route::put('/edit-remarks/{id}', 'editRemarks')->name('edit-remarks');

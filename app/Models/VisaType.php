@@ -8,6 +8,5 @@ class VisaType extends Model
 {
     protected $fillable = [
         'visa_type',
-        'visa_description'
     ];
 }

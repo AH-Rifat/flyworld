@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visa_types', function (Blueprint $table) {
+        Schema::create('visa_type_descriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('visa_type');
+            $table->foreignId('country_id')->constrained('countries')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('visa_type_id')->constrained('visa_types')->cascadeOnUpdate()->restrictOnDelete();
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visa_types');
+        Schema::dropIfExists('visa_type_descriptions');
     }
 };

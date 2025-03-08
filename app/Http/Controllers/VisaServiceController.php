@@ -11,6 +11,7 @@ use App\Models\Remark;
 use App\Models\SampleDocumentsAndPhotos;
 use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
+use App\Models\VisaTypeDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -21,15 +22,17 @@ class VisaServiceController extends Controller
     public function visaTypeCountryList()
     {
         $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
         $countries = Country::latest()->select('id', 'country_name')->paginate(10);
-        $visaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->paginate(10);
+        $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
+        $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->latest()->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
         $remarks = Remark::with('country')->latest()->select('id', 'country_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
         $feeAndServiceCharges = FeeAndServiceCharges::with('country')->latest()->select('id', 'country_id', 'fee_and_service_charges')->paginate(10);
 
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'visaTypes', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'allVisaTypes', 'visaTypes', 'visaTypeDescriptions', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
     }
 
     public function createCountry(Request $request)
@@ -79,7 +82,6 @@ class VisaServiceController extends Controller
     {
         $validation = $request->validate([
             'visa_type' => ['required', 'unique:visa_types,visa_type'],
-            'visa_description' => ['required'],
         ]);
 
         VisaType::create($validation);
@@ -90,7 +92,6 @@ class VisaServiceController extends Controller
     {
         $validation = $request->validate([
             'visa_type' => ['required'],
-            'visa_description' => ['required'],
         ]);
         $visaType = VisaType::find($id);
         $visaType->update($validation);
@@ -100,6 +101,37 @@ class VisaServiceController extends Controller
     public function deleteVisaType($id)
     {
         VisaType::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // visa types discription sections
+
+    public function createVisaTypeDescription(Request $request)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'visa_type_id' => ['required'],
+            'description' => ['required'],
+        ]);
+        VisaTypeDescription::create($validation);
+        return redirect()->back();
+    }
+
+    public function editVisaTypeDescription(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'country_id' => ['required'],
+            'visa_type_id' => ['required'],
+            'description' => ['required'],
+        ]);
+        $visaTypeDescription = VisaTypeDescription::find($id);
+        $visaTypeDescription->update($validation);
+        return redirect()->back();
+    }
+
+    public function deleteVisaTypeDescription($id)
+    {
+        VisaTypeDescription::find($id)->delete();
         return redirect()->back();
     }
 
@@ -253,7 +285,7 @@ class VisaServiceController extends Controller
     public function getSampleDocumentsAndPhotos()
     {
         $allCountries = Country::latest()->select('id', 'country_name')->get();
-        $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
+        $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
         $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
         return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries', 'allVisaTypes'));
     }

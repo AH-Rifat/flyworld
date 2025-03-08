@@ -2,18 +2,26 @@ import { Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const VisaTypeTable = ({ data, onEdit }) => {
+const VisaTypeDiscriptionTable = ({ data, onEdit }) => {
     const [isReadMore, setIsReadMore] = useState(false);
 
     const onDelete = (id) => {
-        if (confirm("Are you sure you want to delete this visa-type?")) {
-            router.delete(`/delete-visa-type/${id}`, {
+        if (
+            confirm(
+                "Are you sure you want to delete this Visa Type Description?"
+            )
+        ) {
+            router.delete(`/delete-visa-type-description/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Visa-type deleted");
+                    toast.success("Visa Type Description deleted", {
+                        position: "top-center",
+                    });
                 },
                 onError: () => {
-                    toast.error("Something went wrong");
+                    toast.error("Something went wrong", {
+                        position: "top-center",
+                    });
                 },
             });
         }
@@ -29,6 +37,9 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                 ID
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                Country Name
+                            </th>
+                            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                 Visa Type
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
@@ -40,7 +51,7 @@ const VisaTypeTable = ({ data, onEdit }) => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {data.data.length === 0 ? (
+                        {data?.data?.length === 0 ? (
                             <tr>
                                 <td
                                     colSpan="4"
@@ -50,7 +61,7 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                 </td>
                             </tr>
                         ) : (
-                            data.data.map((item, index) => (
+                            data?.data.map((item, index) => (
                                 <tr
                                     key={item.id}
                                     className="bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800"
@@ -59,16 +70,16 @@ const VisaTypeTable = ({ data, onEdit }) => {
                                         {index + 1}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {item.visa_type}
+                                        {item.country.country_name}
+                                    </td>
+                                    <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
+                                        {item.visa_type.visa_type}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
-                                            ? item.visa_description
-                                            : item.visa_description.slice(
-                                                  0,
-                                                  50
-                                              )}
-                                        {item.visa_description.length > 50 && (
+                                            ? item.description
+                                            : item.description.slice(0, 50)}
+                                        {item.description.length > 50 && (
                                             <button
                                                 onClick={() =>
                                                     setIsReadMore(!isReadMore)
@@ -113,10 +124,10 @@ const VisaTypeTable = ({ data, onEdit }) => {
             </div>
 
             {/* Pagination */}
-            {data.links.length > 1 && (
+            {data?.links?.length > 1 && (
                 <div className="mt-6 flex justify-center">
                     <nav className="flex gap-1">
-                        {data.links.map((link, index) => (
+                        {data?.links?.map((link, index) => (
                             <span key={index}>
                                 {link.url ? (
                                     <Link
@@ -149,4 +160,4 @@ const VisaTypeTable = ({ data, onEdit }) => {
     );
 };
 
-export default VisaTypeTable;
+export default VisaTypeDiscriptionTable;
