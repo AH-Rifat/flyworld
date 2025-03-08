@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('fee_and_service_charges', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('visa_type_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('fee_and_service_charges');
             $table->timestamps();
         });

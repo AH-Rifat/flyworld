@@ -1,13 +1,16 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
-import Button from "../../components/ui/Button";
-import SelectCountryList from "../../components/SelectCountryList";
-import VisaFeesServiceChargesTable from "./Tables/VisaFeesServiceChargesTable";
+import Button from "../../../components/ui/Button";
+import TextariaField from "../../../components/ui/TextariaField";
+import SelectCountryList from "../../../components/SelectCountryList";
+import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
+import VisaFeesServiceChargesTable from "./VisaFeesServiceChargesTable";
 import { toast } from "react-toastify";
 
 const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
         country_id: "",
+        visa_type_id: "",
         fee_and_service_charges: "",
     });
 
@@ -19,7 +22,9 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
         post("/create-fee-and-service-charges", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Visa Fees and Service Charges added");
+                toast.success("Visa Fees and Service Charges added", {
+                    position: "top-center",
+                });
                 reset();
             },
             onError: () =>
@@ -34,7 +39,9 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
         put(`/edit-fee-and-service-charges/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Visa Fees and Service Charges edited");
+                toast.success("Visa Fees and Service Charges edited", {
+                    position: "top-center",
+                });
                 setIsEdit(false);
                 reset();
             },
@@ -49,6 +56,7 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
         setIsEdit(true);
         setEditId(item.id);
         setData("country_id", item.country_id);
+        setData("visa_type_id", item.visa_type_id);
         setData("fee_and_service_charges", item.fee_and_service_charges);
     };
 
@@ -67,10 +75,17 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
                     {errors.country_id && (
                         <p className="text-red-600">{errors.country_id}</p>
                     )}
+                    <SelectVisaTypeList
+                        value={data.visa_type_id}
+                        onChange={(e) =>
+                            setData("visa_type_id", e.target.value)
+                        }
+                    />
+                    {errors.visa_type_id && (
+                        <p className="text-red-600">{errors.visa_type_id}</p>
+                    )}
                     <div className="flex-1/2">
-                        <textarea
-                            rows={6}
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                        <TextariaField
                             placeholder="Write Visa Fees and Service Charges here..."
                             value={data.fee_and_service_charges}
                             onChange={(e) =>
@@ -79,7 +94,7 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
                                     e.target.value
                                 )
                             }
-                        ></textarea>
+                        />
                         {errors.fee_and_service_charges && (
                             <p className="text-red-600">
                                 {errors.fee_and_service_charges}
@@ -88,7 +103,7 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
                     </div>
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit" : "Add"}
+                            {isEdit ? "Update" : "Add"}
                         </Button>
                     </div>
                 </form>

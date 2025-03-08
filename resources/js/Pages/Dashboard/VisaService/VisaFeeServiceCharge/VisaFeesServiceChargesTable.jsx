@@ -14,10 +14,14 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
             router.delete(`/delete-fee-and-service-charges/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Visa Fees and Service Charges delete");
+                    toast.success("Visa Fees and Service Charges delete", {
+                        position: "top-center",
+                    });
                 },
                 onError: () => {
-                    toast.error("Something went wrong");
+                    toast.error("Something went wrong", {
+                        position: "top-center",
+                    });
                 },
             });
         }
@@ -36,6 +40,9 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
                                 Country Name
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                Visa Type
+                            </th>
+                            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                 Visa Fees and Service Charges
                             </th>
                             <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">
@@ -47,7 +54,7 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
                         {data?.data?.length === 0 ? (
                             <tr>
                                 <td
-                                    colSpan="3"
+                                    colSpan="6"
                                     className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900"
                                 >
                                     No data found
@@ -64,6 +71,9 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
                                         {item.country?.country_name}
+                                    </td>
+                                    <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
+                                        {item.visa_type.visa_type}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
@@ -118,10 +128,10 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
             </div>
 
             {/* Pagination */}
-            {data.links.length > 1 && (
+            {data?.links?.length > 1 && (
                 <div className="mt-6 flex justify-center">
                     <nav className="flex gap-1">
-                        {data.links.map((link, index) => (
+                        {data?.links?.map((link, index) => (
                             <span key={index}>
                                 {link.url ? (
                                     <Link

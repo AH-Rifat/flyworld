@@ -3,7 +3,7 @@ import BeforeDepartureRequirementsSection from "./BeforeDepartureRequirementsSec
 import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "./CreateEligibilitySection";
 import CreateRemarks from "../VisaService/Remarks/CreateRemarks";
-import VisaFeesServiceChargesSection from "./VisaFeesServiceChargesSection";
+import VisaFeesServiceChargesSection from "./VisaFeeServiceCharge/VisaFeesServiceChargesSection";
 import VisaProcessingTimeSection from "./VisaProcessingTimeSection";
 import VisaTypeDiscriptionSection from "./VisaTypeDiscription/VisaTypeDiscriptionSection";
 import VisaTypeSection from "./VisaType/VisaTypeSection";

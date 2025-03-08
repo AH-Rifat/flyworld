@@ -8,11 +8,17 @@ class FeeAndServiceCharges extends Model
 {
     protected $fillable = [
         'country_id',
+        'visa_type_id',
         'fee_and_service_charges'
     ];
 
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function visaType()
+    {
+        return $this->belongsTo(VisaType::class);
     }
 }
