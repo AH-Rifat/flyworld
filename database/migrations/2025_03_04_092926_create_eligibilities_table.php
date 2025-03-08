@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('eligibilities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('visa_type_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('eligibility_content');
             $table->timestamps();
         });

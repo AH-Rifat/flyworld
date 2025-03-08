@@ -27,7 +27,7 @@ class VisaServiceController extends Controller
         $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
         $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->latest()->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
         $remarks = Remark::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
-        $eligibilitys = Eligibility::with('country')->latest()->select('id', 'country_id', 'eligibility_content')->paginate(10);
+        $eligibilitys = Eligibility::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with('country')->latest()->select('id', 'country_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
         $feeAndServiceCharges = FeeAndServiceCharges::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'fee_and_service_charges')->paginate(10);
@@ -179,7 +179,8 @@ class VisaServiceController extends Controller
     public function createEligibility(Request $request)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
             'eligibility_content' => ['required'],
         ]);
         Eligibility::create($validation);
@@ -189,7 +190,8 @@ class VisaServiceController extends Controller
     public function editEligibility(Request $request, $id)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
             'eligibility_content' => ['required'],
         ]);
         $eligibility = Eligibility::find($id);

@@ -10,10 +10,14 @@ const EligibilityTable = ({ data, onEdit }) => {
             router.delete(`/delete-eligibility/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Eligibility deleted");
+                    toast.success("Eligibility deleted", {
+                        position: "top-center",
+                    });
                 },
                 onError: () => {
-                    toast.error("Something went wrong");
+                    toast.error("Something went wrong", {
+                        position: "top-center",
+                    });
                 },
             });
         }
@@ -31,6 +35,9 @@ const EligibilityTable = ({ data, onEdit }) => {
                                 Country Name
                             </th>
                             <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                Visa Type
+                            </th>
+                            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                 Eligibility Content
                             </th>
                             <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">
@@ -42,10 +49,10 @@ const EligibilityTable = ({ data, onEdit }) => {
                         {data?.data?.length === 0 ? (
                             <tr>
                                 <td
-                                    colSpan="3"
+                                    colSpan="6"
                                     className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900"
                                 >
-                                    No eligibility to apply for visa was found
+                                    No data found
                                 </td>
                             </tr>
                         ) : (
@@ -59,6 +66,9 @@ const EligibilityTable = ({ data, onEdit }) => {
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
                                         {item.country?.country_name}
+                                    </td>
+                                    <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
+                                        {item.visa_type?.visa_type}
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
@@ -113,10 +123,10 @@ const EligibilityTable = ({ data, onEdit }) => {
             </div>
 
             {/* Pagination */}
-            {data.links.length > 1 && (
+            {data?.links?.length > 1 && (
                 <div className="mt-6 flex justify-center">
                     <nav className="flex gap-1">
-                        {data.links.map((link, index) => (
+                        {data?.links?.map((link, index) => (
                             <span key={index}>
                                 {link.url ? (
                                     <Link

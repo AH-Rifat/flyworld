@@ -1,13 +1,16 @@
 import { useForm } from "@inertiajs/react";
-import SelectCountryList from "../../components/SelectCountryList";
+import SelectCountryList from "../../../components/SelectCountryList";
+import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
 import { useState } from "react";
-import Button from "../../components/ui/Button";
-import EligibilityTable from "./Tables/EligibilityTable";
+import Button from "../../../components/ui/Button";
+import TextariaField from "../../../components/ui/TextariaField";
+import EligibilityTable from "../Eligibility/EligibilityTable";
 import { toast } from "react-toastify";
 
 const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
         country_id: "",
+        visa_type_id: "",
         eligibility_content: "",
     });
 
@@ -19,7 +22,9 @@ const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
         post("/create-eligibility", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Eligibility added");
+                toast.success("Eligibility added", {
+                    position: "top-center",
+                });
                 reset();
             },
             onError: () =>
@@ -34,7 +39,9 @@ const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
         put(`/edit-eligibility/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Eligibility edited");
+                toast.success("Eligibility edited", {
+                    position: "top-center",
+                });
                 setIsEdit(false);
                 reset();
             },
@@ -48,6 +55,7 @@ const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
     const onEdit = (item) => {
         setIsEdit(true);
         setData("country_id", item.country_id);
+        setData("visa_type_id", item.visa_type_id);
         setData("eligibility_content", item.eligibility_content);
         setEditId(item.id);
     };
@@ -67,16 +75,23 @@ const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
                     {errors.country_id && (
                         <p className="text-red-600">{errors.country_id}</p>
                     )}
+                    <SelectVisaTypeList
+                        value={data.visa_type_id}
+                        onChange={(e) =>
+                            setData("visa_type_id", e.target.value)
+                        }
+                    />
+                    {errors.visa_type_id && (
+                        <p className="text-red-600">{errors.visa_type_id}</p>
+                    )}
                     <div className="flex-1/2">
-                        <textarea
-                            rows={6}
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                        <TextariaField
                             placeholder="Write Eligibility to Apply for Visa here..."
                             value={data.eligibility_content}
                             onChange={(e) =>
                                 setData("eligibility_content", e.target.value)
                             }
-                        ></textarea>
+                        />
                         {errors.eligibility_content && (
                             <p className="text-red-600">
                                 {errors.eligibility_content}
@@ -85,7 +100,7 @@ const CreateEligibilitySection = ({ eligibilitysData: eligibilitys }) => {
                     </div>
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit" : "Add"}
+                            {isEdit ? "Update" : "Add"}
                         </Button>
                     </div>
                 </form>
