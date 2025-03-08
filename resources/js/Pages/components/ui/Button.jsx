@@ -1,9 +1,9 @@
-const Button = ({ children, type, ...props }) => {
+const Button = ({ children, type, className = "", ...props }) => {
     return (
         <>
             <button
                 type={type}
-                className="w-full text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className={`w-full ${className} text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
                 {...props}
             >
                 {children}

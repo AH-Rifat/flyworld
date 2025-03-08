@@ -80,17 +80,17 @@
     "src": "public/assets/img/soap-icon-plane.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BNLSkIEr.css",
+    "file": "assets/app-DTN1lC0U.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-Did6lwgg.js",
+    "file": "assets/app-DRYftnnz.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "css": [
-      "assets/app-DBZGg_8Q.css"
+      "assets/app-BUNUKToe.css"
     ],
     "assets": [
       "assets/fly-world-logo-Bto4eU2z.png",

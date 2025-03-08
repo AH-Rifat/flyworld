@@ -86,5 +86,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-important-contact-and-links', 'createImportantContactAndLinks')->name('create-important-contact-and-links');
         Route::put('/edit-important-contact-and-links/{id}', 'editImportantContactAndLinks')->name('edit-important-contact-and-links');
         Route::delete('/delete-important-contact-and-links/{id}', 'deleteImportantContactAndLinks')->name('delete-important-contact-and-links');
+
+        // visa documents requirements routes
+        Route::get('/get-visa-documents-requirements', 'getVisaDocumentsRequirements')->name('get-visa-documents-requirements');
+        Route::post('/create-visa-documents-requirements', 'createVisaDocumentsRequirements')->name('create-visa-documents-requirements');
+        Route::put('/edit-visa-documents-requirements/{id}', 'editVisaDocumentsRequirements')->name('edit-visa-documents-requirements');
+        Route::delete('/delete-visa-documents-requirements/{id}', 'deleteVisaDocumentsRequirements')->name('delete-visa-documents-requirements');
     });
 });

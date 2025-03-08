@@ -71,6 +71,8 @@ const DashboardLayout = ({ children }) => {
                                 className={`flex items-center w-full p-2 ${
                                     url === "/create-visa-type-country-name" ||
                                     url ===
+                                        "/get-visa-documents-requirements" ||
+                                    url ===
                                         "/get-important-contact-and-links" ||
                                     url === "/get-sample-documents-and-photos"
                                         ? "bg-gray-300"
@@ -115,8 +117,13 @@ const DashboardLayout = ({ children }) => {
                                     Create Visa-Type, Country-Name & others
                                 </Link>
                                 <Link
-                                    href="#"
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"
+                                    href="/get-visa-documents-requirements"
+                                    className={`flex items-center w-full p-2 ${
+                                        url ===
+                                        "/get-visa-documents-requirements"
+                                            ? "bg-gray-300"
+                                            : ""
+                                    } text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700`}
                                 >
                                     Documents Requirements
                                 </Link>

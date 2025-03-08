@@ -9,11 +9,11 @@ use App\Models\FeeAndServiceCharges;
 use App\Models\ImportantContactAndLink;
 use App\Models\Remark;
 use App\Models\SampleDocumentsAndPhotos;
+use App\Models\VisaDocumentsRequirements;
 use App\Models\VisaProcessingTime;
 use App\Models\VisaType;
 use App\Models\VisaTypeDescription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Throwable;
 
@@ -410,6 +410,50 @@ class VisaServiceController extends Controller
     public function deleteImportantContactAndLinks($id)
     {
         ImportantContactAndLink::find($id)->delete();
+        return redirect()->back();
+    }
+
+    // visa documents requirements routes
+
+    public function getVisaDocumentsRequirements()
+    {
+        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
+        $documentRequirementData = VisaDocumentsRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'description')->paginate(10);
+        return Inertia::render('Dashboard/VisaService/DocumentRequirements/DocumentRequirementSection', compact('documentRequirementData', 'allCountries', 'allVisaTypes'));
+    }
+
+    public function createVisaDocumentsRequirements(Request $request)
+    {
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        VisaDocumentsRequirements::create($validated);
+
+        return redirect()->back();
+    }
+
+    public function editVisaDocumentsRequirements(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+        $visaDocumentsRequirements = VisaDocumentsRequirements::find($id);
+        $visaDocumentsRequirements->update($validated);
+
+        return redirect()->back();
+    }
+
+    public function deleteVisaDocumentsRequirements($id)
+    {
+        VisaDocumentsRequirements::find($id)->delete();
         return redirect()->back();
     }
 }
