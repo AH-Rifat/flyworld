@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\VisaServiceController as FrontendVisaServiceController;
 use App\Http\Controllers\VisaServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,8 @@ Route::get('/tourist-packages', function () {
     return inertia('TouristPackages/TouristPackage');
 });
 
-Route::get('/visa-service', function () {
-    return inertia('VisaService/VisaService');
+Route::controller(FrontendVisaServiceController::class)->group(function () {
+    Route::get('/visa-service', 'visaServicePage')->name('visa-service-page');
 });
 
 Route::middleware('auth')->group(function () {

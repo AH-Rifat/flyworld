@@ -88,8 +88,8 @@ const ImportantContactTable = ({ data, onEdit }) => {
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
                                             ? item.address
-                                            : item.address.slice(0, 50)}
-                                        {item.address.length > 50 && (
+                                            : item?.address?.slice(0, 50)}
+                                        {item?.address?.length > 50 && (
                                             <button
                                                 onClick={() =>
                                                     setIsReadMore(!isReadMore)
@@ -113,8 +113,8 @@ const ImportantContactTable = ({ data, onEdit }) => {
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore1
                                             ? item.office_hours
-                                            : item.office_hours.slice(0, 50)}
-                                        {item.office_hours.length > 50 && (
+                                            : item.office_hours?.slice(0, 50)}
+                                        {item.office_hours?.length > 50 && (
                                             <button
                                                 onClick={() =>
                                                     setIsReadMore1(!isReadMore1)

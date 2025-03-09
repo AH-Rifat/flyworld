@@ -2,8 +2,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FaSearch } from "react-icons/fa";
 import DocumentRequirementSection from "./DocumentRequirementSection";
+import SelectCountryList from "../components/SelectCountryList"
+import { useForm } from "@inertiajs/react";
 
 const VisaService = () => {
+    const { data, setData, post, errors, processing, reset } = useForm({
+        'country_id': "",
+    });
+
     const sampleDocumentPhotoData = [
         {
             id: 1,
@@ -45,16 +51,13 @@ const VisaService = () => {
                                 >
                                     Select your country
                                 </label>
-                                <select
-                                    id="countries"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                >
-                                    <option value=""></option>
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>France</option>
-                                    <option>Germany</option>
-                                </select>
+                                <SelectCountryList
+                                    value={data.country_id}
+                                    onChange={(e) => setData("country_id", e.target.value)}
+                                />
+                                {errors.country_id && (
+                                    <p className="text-red-600">{errors.country_id}</p>
+                                )}
                             </div>
                             <div className="w-full md:w-96">
                                 <label

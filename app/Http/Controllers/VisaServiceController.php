@@ -389,8 +389,8 @@ class VisaServiceController extends Controller
             'visa_type_id' => 'required|exists:visa_types,id',
             'title' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => ['required', 'numeric', 'digits:11'],
+            'email' => 'nullable|email|max:255',
+            'phone' => ['required'],
             'office_hours' => 'nullable|string|max:255',
         ]);
 
@@ -406,8 +406,8 @@ class VisaServiceController extends Controller
             'visa_type_id' => 'required|exists:visa_types,id',
             'title' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => ['required', 'numeric', 'digits:11'],
+            'email' => 'nullable|email|max:255',
+            'phone' => ['required'],
             'office_hours' => 'nullable|string|max:255',
         ]);
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('visa_type_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('title');
             $table->text('address');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->integer('phone');
             $table->string('office_hours')->nullable();
             $table->timestamps();
