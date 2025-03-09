@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('before_departure_requirements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained('countries')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('visa_type_id')->constrained('visa_types')->cascadeOnUpdate()->restrictOnDelete();
             $table->string('before_departure_requirements');
             $table->timestamps();
         });

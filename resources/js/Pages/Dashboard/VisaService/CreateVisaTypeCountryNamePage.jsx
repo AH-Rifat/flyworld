@@ -1,5 +1,5 @@
 import DashBoardLayout from "../../components/Dashboard/DashboardLayout";
-import BeforeDepartureRequirementsSection from "./BeforeDepartureRequirementsSection";
+import BeforeDepartureRequirementsSection from "./BeforeDepartureRequirement/BeforeDepartureRequirementsSection";
 import CountrySection from "./CountrySection";
 import CreateEligibilitySection from "../VisaService/Eligibility/CreateEligibilitySection";
 import CreateRemarks from "../VisaService/Remarks/CreateRemarks";

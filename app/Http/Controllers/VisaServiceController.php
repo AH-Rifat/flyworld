@@ -29,7 +29,7 @@ class VisaServiceController extends Controller
         $remarks = Remark::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'processing_time')->paginate(10);
-        $beforeDepartureRequirements = BeforeDepartureRequirements::with('country')->latest()->select('id', 'country_id', 'before_departure_requirements')->paginate(10);
+        $beforeDepartureRequirements = BeforeDepartureRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'before_departure_requirements')->paginate(10);
         $feeAndServiceCharges = FeeAndServiceCharges::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'fee_and_service_charges')->paginate(10);
 
         return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'allVisaTypes', 'visaTypes', 'visaTypeDescriptions', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
@@ -241,7 +241,8 @@ class VisaServiceController extends Controller
     public function createBeforeDepartureRequirements(Request $request)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
             'before_departure_requirements' => ['required'],
         ]);
         BeforeDepartureRequirements::create($validation);
@@ -251,7 +252,8 @@ class VisaServiceController extends Controller
     public function editBeforeDepartureRequirements(Request $request, $id)
     {
         $validation = $request->validate([
-            'country_id' => ['required'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'visa_type_id' => ['required', 'exists:visa_types,id'],
             'before_departure_requirements' => ['required'],
         ]);
         $beforeDepartureRequirements = BeforeDepartureRequirements::find($id);

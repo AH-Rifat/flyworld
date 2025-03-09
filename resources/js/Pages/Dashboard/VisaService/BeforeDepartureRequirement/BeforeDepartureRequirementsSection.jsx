@@ -1,15 +1,18 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import SelectCountryList from "../../components/SelectCountryList";
-import Button from "../../components/ui/Button";
-import BeforeDepartureRequirementsTable from "./Tables/BeforeDepartureRequirementsTable";
+import SelectCountryList from "../../../components/SelectCountryList";
+import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
+import Button from "../../../components/ui/Button";
+import TextariaField from "../../../components/ui/TextariaField";
+import BeforeDepartureRequirementsTable from "./BeforeDepartureRequirementsTable";
 
 const BeforeDepartureRequirementsSection = ({
     beforeDepartureRequirementsData,
 }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
         country_id: "",
+        visa_type_id: "",
         before_departure_requirements: "",
     });
 
@@ -21,7 +24,9 @@ const BeforeDepartureRequirementsSection = ({
         post("/create-before-departure-requirements", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Before Departure Requirements added");
+                toast.success("Before Departure Requirements added", {
+                    position: "top-center",
+                });
                 reset();
             },
             onError: () =>
@@ -36,7 +41,9 @@ const BeforeDepartureRequirementsSection = ({
         put(`/edit-before-departure-requirements/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Before Departure Requirements edited");
+                toast.success("Before Departure Requirements edited", {
+                    position: "top-center",
+                });
                 setIsEdit(false);
                 reset();
             },
@@ -49,6 +56,7 @@ const BeforeDepartureRequirementsSection = ({
 
     const onEdit = (item) => {
         setData("country_id", item.country_id);
+        setData("visa_type_id", item.visa_type_id);
         setData(
             "before_departure_requirements",
             item.before_departure_requirements
@@ -72,10 +80,17 @@ const BeforeDepartureRequirementsSection = ({
                     {errors.country_id && (
                         <p className="text-red-600">{errors.country_id}</p>
                     )}
+                    <SelectVisaTypeList
+                        value={data.visa_type_id}
+                        onChange={(e) =>
+                            setData("visa_type_id", e.target.value)
+                        }
+                    />
+                    {errors.visa_type_id && (
+                        <p className="text-red-600">{errors.visa_type_id}</p>
+                    )}
                     <div className="flex-1/2">
-                        <textarea
-                            rows={6}
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                        <TextariaField
                             placeholder="Write Before Departure Requirements here..."
                             value={data.before_departure_requirements}
                             onChange={(e) =>
@@ -84,7 +99,7 @@ const BeforeDepartureRequirementsSection = ({
                                     e.target.value
                                 )
                             }
-                        ></textarea>
+                        />
                         {errors.before_departure_requirements && (
                             <p className="text-red-600">
                                 {errors.before_departure_requirements}
@@ -93,7 +108,7 @@ const BeforeDepartureRequirementsSection = ({
                     </div>
                     <div className="lg:w-1/2 lg:ms-auto">
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit" : "Add"}
+                            {isEdit ? "Update" : "Add"}
                         </Button>
                     </div>
                 </form>
