@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 const Accordion = ({ items }) => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -43,11 +44,11 @@ const Accordion = ({ items }) => {
                     <div
                         id={`accordion-content-${index}`}
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            openIndex === index ? "max-h-[500px]" : "max-h-0"
+                            openIndex === index ? "" : "max-h-0"
                         }`}
                     >
                         <div className="px-6 pb-4 text-gray-600">
-                            {item.content}
+                            {HTMLReactParser(item.description)}
                         </div>
                     </div>
                 </div>

@@ -2,36 +2,40 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FaSearch } from "react-icons/fa";
 import DocumentRequirementSection from "./DocumentRequirementSection";
-import SelectCountryList from "../components/SelectCountryList"
 import { useForm } from "@inertiajs/react";
+import { toast } from "react-toastify";
 
-const VisaService = () => {
-    const { data, setData, post, errors, processing, reset } = useForm({
-        'country_id': "",
+const VisaService = ({
+    allCountries,
+    allVisaTypes,
+    visaTypeDescription,
+    elegibilitys,
+    beforeDepartureRequirments,
+    remarks,
+    visaFeeAndServiceCharge,
+    visaProcessingTime,
+    importantContact,
+    sampleDocumentsAndPhoto,
+    documentsRequirements,
+}) => {
+    const { data, setData, post, errors, reset, processing } = useForm({
+        country_id: "",
+        visa_type_id: "",
     });
 
-    const sampleDocumentPhotoData = [
-        {
-            id: 1,
-            image: "https://www.amybd.com/visadoc/sampleVisa/49_Tourist_20220324063836.jpg",
-            text: "Sydney Kingsford Smith International Airport Guest Receiving Point (Sample Photo)",
-        },
-        {
-            id: 2,
-            image: "https://www.amybd.com/visadoc/sampleVisa/49_Tourist_20220324063846.jpg",
-            text: "Sydney Kingsford Smith International Airport Immigration (Sample Photo)",
-        },
-        {
-            id: 3,
-            image: "https://www.amybd.com/visadoc/sampleVisa/49_Tourist_20220803120755.jpg",
-            text: "Sydney Kingsford Smith International Airport Luggage Picking Belt (Sample Photo)",
-        },
-        {
-            id: 4,
-            image: "https://www.amybd.com/visadoc/sampleVisa/49_Tourist_20220802034805.jpg",
-            text: "Australia e Visa sample photo",
-        },
-    ];
+    const handleSearch = (e) => {
+        e.preventDefault();
+        post("/visa-service", {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+            },
+            onError: () =>
+                toast.error("Something went wrong", {
+                    position: "top-center",
+                }),
+        });
+    };
 
     return (
         <>
@@ -42,8 +46,8 @@ const VisaService = () => {
                 </h1>
 
                 <div className="card py-2 mx-auto w-72 md:w-2/3">
-                    <form className="p-3">
-                        <div className=" flex flex-col md:flex-row justify-between place-items-center gap-5 md:px-20">
+                    <form className="p-3" onSubmit={handleSearch}>
+                        <div className="flex flex-col md:flex-row justify-between place-items-center gap-5 md:px-20">
                             <div className="w-full md:w-96">
                                 <label
                                     htmlFor="countries"
@@ -51,12 +55,28 @@ const VisaService = () => {
                                 >
                                     Select your country
                                 </label>
-                                <SelectCountryList
+                                <select
+                                    id="countries"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     value={data.country_id}
-                                    onChange={(e) => setData("country_id", e.target.value)}
-                                />
+                                    onChange={(e) =>
+                                        setData("country_id", e.target.value)
+                                    }
+                                >
+                                    <option value="">Select Country</option>
+                                    {allCountries?.map((country) => (
+                                        <option
+                                            key={country.id}
+                                            value={country.id}
+                                        >
+                                            {country.country_name}
+                                        </option>
+                                    ))}
+                                </select>
                                 {errors.country_id && (
-                                    <p className="text-red-600">{errors.country_id}</p>
+                                    <span className="text-red-600">
+                                        {errors.country_id}
+                                    </span>
                                 )}
                             </div>
                             <div className="w-full md:w-96">
@@ -69,11 +89,26 @@ const VisaService = () => {
                                 <select
                                     id="category"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    value={data.visa_type_id}
+                                    onChange={(e) =>
+                                        setData("visa_type_id", e.target.value)
+                                    }
                                 >
-                                    <option value={""}></option>
-                                    <option value={""}>Tourist Visa</option>
-                                    <option value={""}>Student Visa</option>
+                                    <option value={""}>Select Category</option>
+                                    {allVisaTypes?.map((visaType) => (
+                                        <option
+                                            key={visaType.id}
+                                            value={visaType.id}
+                                        >
+                                            {visaType.visa_type}
+                                        </option>
+                                    ))}
                                 </select>
+                                {errors.visa_type_id && (
+                                    <span className="text-red-600">
+                                        {errors.visa_type_id}
+                                    </span>
+                                )}
                             </div>
                             <div>
                                 <ul className="w-48 text-sm font-semibold text-center text-gray-900 bg-yellow-500 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -95,8 +130,9 @@ const VisaService = () => {
 
                         <div className="text-center my-4">
                             <button
-                                type="button"
-                                className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                                type="submit"
+                                disabled={processing}
+                                className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex cursor-pointer items-center me-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
                             >
                                 <FaSearch className="me-3" />
                                 Search Now
@@ -106,244 +142,214 @@ const VisaService = () => {
                 </div>
 
                 <section>
-                    <div className="card mx-10 my-12">
-                        <h1 className="text-3xl text-center font-semibold bg-sky-200 p-2">
-                            BULGARIA
-                        </h1>
-                        <div className="p-6">
-                            <div className="flex flex-col lg:flex-row items-baseline justify-center gap-20 text-center">
-                                <div className="lg:w-1/2">
-                                    <strong>Sticker Visa</strong>
-                                    <p className="text-sm mt-2">
-                                        There is no Embassy but a consulate of
-                                        the Republic of Bulgaria in Bangladesh.
-                                        The Honorary Consulate of Bulgaria in
-                                        Bangladesh typically offer limited
-                                        consular services. Contact the consulate
-                                        of Bulgaria in Dhaka directly to confirm
-                                        which services they are able to offer.
-                                        Bulgaria has an embassy in New Delhi,
-                                        India, located at 16/17 Chandragupta
-                                        Marg in Chanakyapuri.
-                                    </p>
+                    {visaTypeDescription?.length > 0 && (
+                        <div className="card mx-10 my-12">
+                            <h1 className="text-3xl text-center uppercase font-semibold bg-sky-200 p-2">
+                                {visaTypeDescription[0]?.country?.country_name}
+                            </h1>
+                            <div className="p-6">
+                                <div className="flex flex-col lg:flex-row items-baseline justify-center gap-20 text-center">
+                                    {visaTypeDescription.map((data) => (
+                                        <div key={data.id} className="lg:w-1/2">
+                                            <h2 className="text-xl font-semibold">
+                                                {data.visa_type?.visa_type}
+                                            </h2>
+                                            <p className="text-sm mt-2">
+                                                {data.description}
+                                            </p>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className="lg:w-1/2">
-                                    <strong>Tourist Visa</strong>
-                                    <p className="text-sm mt-2">
-                                        The Standard Short Term "Tourist Visa"
-                                        is for those applicants who want to
-                                        visit Bulgaria for the purpose of Tour /
-                                        Holidaying / Vacation. The Visitor is
-                                        only permitted to stay in Bulgaria for
-                                        the duration of their planned of stay
-                                        but no more than 90 days.The applicant
-                                        must enter and exit the Schengen area
-                                        within that time limit. During their
-                                        stay in Bulgaria, visitors with a
-                                        Tourist Visa are not permitted to accept
-                                        unauthorized employment, attend school,
-                                        or represent foreign information media.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="text-center mt-8">
-                                <button
-                                    type="button"
-                                    className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
-                                >
-                                    Apply Now
-                                </button>
+                                {/* <div className="text-center mt-8">
+                                    <button
+                                        type="button"
+                                        className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                                    >
+                                        Apply Now
+                                    </button>
+                                </div> */}
                             </div>
                         </div>
-                    </div>
+                    )}
                 </section>
 
                 <div className="flex flex-col lg:flex-row gap-8 m-10">
                     <div className="flex flex-col gap-8">
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Eligibility to Apply for Visa
-                            </h2>
-                            <div className="p-6">
-                                <p>
-                                    Any Bangladeshi Nationals are Eligible to
-                                    Apply for Australia Tourist Visa (having a
-                                    valid MRP / E-Passport with at least 6
-                                    months validity) subject to provide some
-                                    required Documents. Also Applicant should,{" "}
-                                    <br /> • be a genuine visitor <br /> • have
-                                    enough funds to support his/her stay and
-                                    leave
-                                </p>
-                            </div>
-                        </section>
+                        {elegibilitys && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Eligibility to Apply for Visa
+                                </h2>
+                                <div className="p-6">
+                                    <p>{elegibilitys?.eligibility_content}</p>
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Documents Requirements
-                            </h2>
-                            <div className="p-6">
-                                <DocumentRequirementSection />
-                            </div>
-                        </section>
+                        {documentsRequirements?.length > 0 && (
+                            <section className={`card h-fit`}>
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Documents Requirements
+                                </h2>
+                                <div className="p-6">
+                                    <DocumentRequirementSection
+                                        data={documentsRequirements}
+                                    />
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Visa Fees & Service Charges
-                            </h2>
-                            <div className="p-6">
-                                <p>
-                                    Visa Fee AUD $190 Biometric Fee BDT 3,700
-                                    approximately Service Charge BDT 10,000{" "}
-                                    <br /> ***Visa fee & service charges are
-                                    NON-REFUNDABLE
-                                </p>
-                            </div>
-                        </section>
+                        {visaFeeAndServiceCharge && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Visa Fees & Service Charges
+                                </h2>
+                                <div className="p-6">
+                                    <p>
+                                        {
+                                            visaFeeAndServiceCharge?.fee_and_service_charges
+                                        }
+                                    </p>
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Processing Time
-                            </h2>
-                            <div className="p-6">
-                                <p>40 to 50 Working Days approximately</p>
-                            </div>
-                        </section>
+                        {visaProcessingTime && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Processing Time
+                                </h2>
+                                <div className="p-6">
+                                    <p>{visaProcessingTime?.processing_time}</p>
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Sample Documents & Photos
-                            </h2>
-                            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {sampleDocumentPhotoData.map((item) => {
-                                    return (
-                                        <div className="card rounded-xl shadow-sky-200 shadow-md overflow-hidden">
-                                            <div className="h-56 overflow-hidden">
-                                                <img
-                                                    src={item.image}
-                                                    alt="image"
-                                                    className="w-full h-full object-cover transform transition duration-500 hover:scale-110"
-                                                />
+                        {sampleDocumentsAndPhoto?.length > 0 && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Sample Documents & Photos
+                                </h2>
+                                <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {sampleDocumentsAndPhoto?.map((item) => {
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className="card rounded-xl shadow-sky-200 shadow-md overflow-hidden"
+                                            >
+                                                <div className="h-56 overflow-hidden">
+                                                    <img
+                                                        src={`images/sample-documents/${item.image}`}
+                                                        alt="image"
+                                                        className="w-full h-full object-cover transform transition duration-500 hover:scale-110"
+                                                    />
+                                                </div>
+                                                <p className="text-sm py-2 px-5 font-semibold text-center">
+                                                    {item.title}
+                                                </p>
                                             </div>
-                                            <p className="text-sm py-2 px-5 font-semibold text-center">
-                                                {item.text}
-                                            </p>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </section>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-8">
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Before Departure Requirements
-                            </h2>
-                            <div className="p-6">
-                                <ul class=" text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                    <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                        *Original Passport including Visa.
-                                    </li>
-                                    <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                                        *Proof of Accommodation.
-                                    </li>
-                                    <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                                        *Round Air Tickets printed copy.
-                                    </li>
-                                    <li class="w-full px-4 py-2 rounded-b-lg">
-                                        *Travel Insurance copy.
-                                    </li>
-                                </ul>
-                            </div>
-                        </section>
+                        {beforeDepartureRequirments && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Before Departure Requirements
+                                </h2>
+                                <div className="p-6">
+                                    <p>
+                                        {
+                                            beforeDepartureRequirments?.before_departure_requirements
+                                        }
+                                    </p>
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Important Contacts & Links
-                            </h2>
-                            <div className="p-6">
-                                <ul class=" text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                    <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                        <table>
-                                            <tr className="flex gap-2">
-                                                <strong>Address:</strong>
-                                                <p>
-                                                    Madani Avenue, Baridhara
-                                                    Diplomatic Enclave, Dhaka
-                                                    1212, Bangladesh.
-                                                </p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Phone:</strong>
-                                                <p>+88 02 0000 0000</p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Email:</strong>
-                                                <p>francevisadhaka@gmail.com</p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Office Hours:</strong>
-                                                <p>8:30 AM to 4:00 PM.</p>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                    <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                                        <table>
-                                            <tr className="flex gap-2">
-                                                <strong>Address:</strong>
-                                                <p>
-                                                    4th Floor, Plot #37, Road
-                                                    #45, 90 Gulshan North,
-                                                    Commercial Area, Dhaka,
-                                                    Bangladesh.
-                                                </p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Phone:</strong>
-                                                <p>+88 02 0000 0000</p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Email:</strong>
-                                                <p>francevisadhaka@gmail.com</p>
-                                            </tr>
-                                            <tr className="flex gap-2">
-                                                <strong>Office Hours:</strong>
-                                                <p>
-                                                    Winter (April- September):
-                                                    9.15 am - 5.15 pm Summer
-                                                    (October- March): 9.15 am –
-                                                    5.45 pm Break from 1.30-
-                                                    2.00 pm (for prayer and
-                                                    lunch) applies round the
-                                                    year.
-                                                </p>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                </ul>
-                            </div>
-                        </section>
+                        {importantContact?.length > 0 && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Important Contacts & Links
+                                </h2>
+                                <div className="p-6">
+                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                        {importantContact?.map((item) => {
+                                            return (
+                                                <li
+                                                    key={item.id}
+                                                    className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                                                >
+                                                    <h4 className="font-semibold mb-2">
+                                                        {item.title}
+                                                    </h4>
+                                                    <table className="w-full">
+                                                        <tbody>
+                                                            <tr className="flex gap-2">
+                                                                <th className="font-semibold">
+                                                                    Address:
+                                                                </th>
+                                                                <td>
+                                                                    {
+                                                                        item.address
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="flex gap-2">
+                                                                <th className="font-semibold">
+                                                                    Phone:
+                                                                </th>
+                                                                <td>
+                                                                    {item.phone}
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="flex gap-2">
+                                                                <th className="font-semibold">
+                                                                    Email:
+                                                                </th>
+                                                                <td>
+                                                                    {item.email}
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="flex gap-2">
+                                                                <th className="font-semibold">
+                                                                    Office
+                                                                    Hours:
+                                                                </th>
+                                                                <td>
+                                                                    {
+                                                                        item.office_hours
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            </section>
+                        )}
 
-                        <section className="card h-fit">
-                            <h2 className="font-semibold bg-sky-200 p-2">
-                                Remarks
-                            </h2>
-                            <div className="p-6">
-                                <p>
-                                    Amy is not liable for any further delays in
-                                    visa processing or for the approval or
-                                    denial of any visa application, since this
-                                    entirely depends on the Embassy. The embassy
-                                    reserves the right to ask for more evidence
-                                    and to contact the applicant for an
-                                    interview if required.
-                                </p>
-                            </div>
-                        </section>
+                        {remarks && (
+                            <section className="card h-fit">
+                                <h2 className="font-semibold bg-sky-200 p-2">
+                                    Remarks
+                                </h2>
+                                <div className="p-6">
+                                    <p>{remarks?.remarks}</p>
+                                </div>
+                            </section>
+                        )}
                     </div>
                 </div>
             </section>
+            <hr className="text-yellow-200 my-20" />
             <Footer />
         </>
     );

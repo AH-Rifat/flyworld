@@ -1,6 +1,6 @@
 import Accordion from "../components/ui/Accordion";
 
-const DocumentRequirementSection = () => {
+const DocumentRequirementSection = ({ data }) => {
     const items = [
         {
             id: 1,
@@ -12,7 +12,8 @@ const DocumentRequirementSection = () => {
         {
             id: 2,
             title: "Business Person",
-            content: "Original Passport with validity of minimum six months after the intended date of departure and minimum two blank pages for visa stamp.",
+            content:
+                "Original Passport with validity of minimum six months after the intended date of departure and minimum two blank pages for visa stamp.",
         },
         {
             id: 3,
@@ -29,7 +30,7 @@ const DocumentRequirementSection = () => {
     ];
     return (
         <>
-            <Accordion items={items} />
+            <Accordion items={data} />
         </>
     );
 };
