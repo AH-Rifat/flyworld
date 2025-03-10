@@ -40,7 +40,7 @@ class VisaServiceController extends Controller
         $visaProcessingTime = VisaProcessingTime::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'processing_time')->first();
         $importantContact = ImportantContactAndLink::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->get();
         $sampleDocumentsAndPhoto = SampleDocumentsAndPhotos::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->get();
-        $documentsRequirements = VisaDocumentsRequirements::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'description')->get();
+        $documentsRequirements = VisaDocumentsRequirements::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'title', 'description')->get();
 
         return Inertia::render('VisaService/VisaService', compact('allCountries', 'allVisaTypes', 'visaTypeDescription', 'elegibilitys', 'beforeDepartureRequirments', 'remarks', 'visaFeeAndServiceCharge', 'visaProcessingTime', 'importantContact', 'sampleDocumentsAndPhoto', 'documentsRequirements'));
     }

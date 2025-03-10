@@ -192,9 +192,9 @@ const VisaService = ({
                                         Eligibility to Apply for Visa
                                     </h2>
                                     <div className="p-6">
-                                        <p>
+                                        <div>
                                             {elegibilitys?.eligibility_content}
-                                        </p>
+                                        </div>
                                     </div>
                                 </section>
                             )}
@@ -218,11 +218,11 @@ const VisaService = ({
                                         Visa Fees & Service Charges
                                     </h2>
                                     <div className="p-6">
-                                        <p>
+                                        <div>
                                             {HTMLReactParser(
                                                 visaFeeAndServiceCharge?.fee_and_service_charges
                                             )}
-                                        </p>
+                                        </div>
                                     </div>
                                 </section>
                             )}
@@ -233,11 +233,11 @@ const VisaService = ({
                                         Processing Time
                                     </h2>
                                     <div className="p-6">
-                                        <p>
+                                        <div>
                                             {
                                                 visaProcessingTime?.processing_time
                                             }
-                                        </p>
+                                        </div>
                                     </div>
                                 </section>
                             )}
@@ -281,11 +281,11 @@ const VisaService = ({
                                         Before Departure Requirements
                                     </h2>
                                     <div className="p-6">
-                                        <p>
+                                        <div>
                                             {HTMLReactParser(
                                                 beforeDepartureRequirments?.before_departure_requirements
                                             )}
-                                        </p>
+                                        </div>
                                     </div>
                                 </section>
                             )}

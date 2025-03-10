@@ -22,7 +22,13 @@ const Accordion = ({ items }) => {
                         aria-controls={`accordion-content-${index}`}
                     >
                         <span className="text-lg font-medium text-gray-900">
-                            {item.title}
+                            {item.title == "serviceholder" && "Service Holder"}
+                            {item.title == "businessperson" &&
+                                "Business Person"}
+                            {item.title == "professionals" &&
+                                `Professionals (Doctor, Engineer, CA,
+                                            etc)`}
+                            {item.title == "others" && "Others"}
                         </span>
                         <svg
                             className={`w-6 h-6 transform transition-transform duration-300 ${
