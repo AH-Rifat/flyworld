@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Eligibility;
 use App\Models\FeeAndServiceCharges;
 use App\Models\ImportantContactAndLink;
+use App\Models\ImportantDocumentInfo;
 use App\Models\Remark;
 use App\Models\SampleDocumentsAndPhotos;
 use App\Models\VisaDocumentsRequirements;
@@ -31,8 +32,9 @@ class VisaServiceController extends Controller
         $visaProcessingTimes = VisaProcessingTime::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'before_departure_requirements')->paginate(10);
         $feeAndServiceCharges = FeeAndServiceCharges::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'fee_and_service_charges')->paginate(10);
+        $importantDocumentInfo = ImportantDocumentInfo::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'description', 'remarks')->paginate(10);
 
-        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'allVisaTypes', 'visaTypes', 'visaTypeDescriptions', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges'));
+        return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'allVisaTypes', 'visaTypes', 'visaTypeDescriptions', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges', 'importantDocumentInfo'));
     }
 
     public function createCountry(Request $request)
@@ -464,6 +466,42 @@ class VisaServiceController extends Controller
     public function deleteVisaDocumentsRequirements($id)
     {
         VisaDocumentsRequirements::find($id)->delete();
+        return redirect()->back();
+    }
+
+    public function createImportantDocumentsInformation(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'remarks' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        ImportantDocumentInfo::create($validated);
+
+        return redirect()->back();
+    }
+
+    public function editImportantDocumentsInformation(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'country_id' => 'required|exists:countries,id',
+            'visa_type_id' => 'required|exists:visa_types,id',
+            'remarks' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $importantDocumentInfo = ImportantDocumentInfo::find($id);
+        $importantDocumentInfo->update($validated);
+
+        return redirect()->back();
+    }
+
+    public function deleteImportantDocumentsInformation($id)
+    {
+        ImportantDocumentInfo::find($id)->delete();
         return redirect()->back();
     }
 }

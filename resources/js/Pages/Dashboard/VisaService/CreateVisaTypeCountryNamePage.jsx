@@ -7,6 +7,7 @@ import VisaFeesServiceChargesSection from "./VisaFeeServiceCharge/VisaFeesServic
 import VisaProcessingTimeSection from "./VisaProcessingTime/VisaProcessingTimeSection";
 import VisaTypeDiscriptionSection from "./VisaTypeDiscription/VisaTypeDiscriptionSection";
 import VisaTypeSection from "./VisaType/VisaTypeSection";
+import ImportantDocumentsInfo from "./ImportantDocumentsInfo/ImportantDocumentsInfo";
 
 const CreateVisaTypeCountryNamePage = ({
     countries,
@@ -17,12 +18,16 @@ const CreateVisaTypeCountryNamePage = ({
     visaProcessingTimes,
     beforeDepartureRequirements,
     feeAndServiceCharges,
+    importantDocumentInfo,
 }) => {
     return (
         <DashBoardLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-10">
                     <CountrySection countiesData={countries} />
+                    <ImportantDocumentsInfo
+                        importantDocumentInfos={importantDocumentInfo}
+                    />
                     <CreateRemarks remarksData={remarks} />
                     <VisaFeesServiceChargesSection
                         feeAndServiceChargesData={feeAndServiceCharges}

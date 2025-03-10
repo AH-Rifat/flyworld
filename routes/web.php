@@ -95,5 +95,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-visa-documents-requirements', 'createVisaDocumentsRequirements')->name('create-visa-documents-requirements');
         Route::put('/edit-visa-documents-requirements/{id}', 'editVisaDocumentsRequirements')->name('edit-visa-documents-requirements');
         Route::delete('/delete-visa-documents-requirements/{id}', 'deleteVisaDocumentsRequirements')->name('delete-visa-documents-requirements');
+
+        // important documents information routes
+        Route::post('/create-important-documents-information', 'createImportantDocumentsInformation')->name('create-important-documents-information');
+        Route::put('/edit-important-documents-information/{id}', 'editImportantDocumentsInformation')->name('edit-important-documents-information');
+        Route::delete('/delete-important-documents-information/{id}', 'deleteImportantDocumentsInformation')->name('delete-important-documents-information');
     });
 });
