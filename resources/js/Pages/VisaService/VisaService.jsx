@@ -8,12 +8,12 @@ import VisaListModal from "./VisaListModal";
 import Button from "../components/ui/Button";
 import { FaPrint } from "react-icons/fa6";
 import { useReactToPrint } from "react-to-print";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import HTMLReactParser from "html-react-parser/lib/index";
 
 const VisaService = ({
     allCountries,
-    allVisaTypes,
+    getVisaTypeFromDescriptionData,
     visaTypeDescription,
     elegibilitys,
     beforeDepartureRequirments,
@@ -28,8 +28,21 @@ const VisaService = ({
         country_id: "",
         visa_type_id: "",
     });
+    const [showVisaTypeFromCountryData, setShowVisaTypeFromCountryData] =
+        useState([]);
+
     const contentRef = useRef(null);
     const reactToPrintFn = useReactToPrint({ contentRef });
+
+    const handleCountryChange = (e) => {
+        const filterData = getVisaTypeFromDescriptionData?.filter((item) => {
+            if (item.country_id == e.target.value) {
+                setData("country_id", e.target.value);
+                return item;
+            }
+        });
+        setShowVisaTypeFromCountryData(filterData);
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -66,10 +79,11 @@ const VisaService = ({
                                 <select
                                     id="countries"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    value={data.country_id}
-                                    onChange={(e) =>
-                                        setData("country_id", e.target.value)
+                                    value={
+                                        showVisaTypeFromCountryData[0]
+                                            ?.country_id || data.country_id
                                     }
+                                    onChange={handleCountryChange}
                                 >
                                     <option value="">Select Country</option>
                                     {allCountries?.map((country) => (
@@ -103,14 +117,16 @@ const VisaService = ({
                                     }
                                 >
                                     <option value={""}>Select Category</option>
-                                    {allVisaTypes?.map((visaType) => (
-                                        <option
-                                            key={visaType.id}
-                                            value={visaType.id}
-                                        >
-                                            {visaType.visa_type}
-                                        </option>
-                                    ))}
+                                    {showVisaTypeFromCountryData?.map(
+                                        (visaType) => (
+                                            <option
+                                                key={visaType.id}
+                                                value={visaType.visa_type_id}
+                                            >
+                                                {visaType.visa_type.visa_type}
+                                            </option>
+                                        )
+                                    )}
                                 </select>
                                 {errors.visa_type_id && (
                                     <span className="text-red-600">
@@ -165,9 +181,9 @@ const VisaService = ({
                                                 <h2 className="text-xl font-semibold">
                                                     {data.visa_type?.visa_type}
                                                 </h2>
-                                                <p className="text-sm mt-2">
+                                                <div className="text-sm mt-2">
                                                     {data.description}
-                                                </p>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

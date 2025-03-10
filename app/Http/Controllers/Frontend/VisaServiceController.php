@@ -22,15 +22,15 @@ class VisaServiceController extends Controller
     public function visaServicePage()
     {
         $allCountries = Country::latest()->select('id', 'country_name')->get();
-        $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
+        $getVisaTypeFromDescriptionData = VisaTypeDescription::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id')->get();
 
-        return Inertia::render('VisaService/VisaService', compact('allCountries', 'allVisaTypes'));
+        return Inertia::render('VisaService/VisaService', compact('allCountries', 'getVisaTypeFromDescriptionData'));
     }
 
     public function getVisaServiceData(Request $request)
     {
         $allCountries = Country::latest()->select('id', 'country_name')->get();
-        $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
+        $getVisaTypeFromDescriptionData = VisaTypeDescription::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id')->get();
 
         $visaTypeDescription = VisaTypeDescription::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'description')->get();
         $elegibilitys = Eligibility::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->first();
@@ -42,7 +42,7 @@ class VisaServiceController extends Controller
         $sampleDocumentsAndPhoto = SampleDocumentsAndPhotos::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->get();
         $documentsRequirements = VisaDocumentsRequirements::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'title', 'description')->get();
 
-        return Inertia::render('VisaService/VisaService', compact('allCountries', 'allVisaTypes', 'visaTypeDescription', 'elegibilitys', 'beforeDepartureRequirments', 'remarks', 'visaFeeAndServiceCharge', 'visaProcessingTime', 'importantContact', 'sampleDocumentsAndPhoto', 'documentsRequirements'));
+        return Inertia::render('VisaService/VisaService', compact('allCountries', 'getVisaTypeFromDescriptionData', 'visaTypeDescription', 'elegibilitys', 'beforeDepartureRequirments', 'remarks', 'visaFeeAndServiceCharge', 'visaProcessingTime', 'importantContact', 'sampleDocumentsAndPhoto', 'documentsRequirements'));
     }
 
     public function refundPolicy()

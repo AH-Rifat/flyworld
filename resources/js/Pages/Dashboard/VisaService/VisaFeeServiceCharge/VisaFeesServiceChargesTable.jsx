@@ -82,8 +82,8 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
                                                   item.fee_and_service_charges
                                               )
                                             : HTMLReactParser(
-                                                  item.fee_and_service_charges
-                                              ).slice(0, 50)}
+                                                  item.fee_and_service_charges.slice(0, 50)
+                                              )}
                                         {item.fee_and_service_charges.length >
                                             50 && (
                                             <button
