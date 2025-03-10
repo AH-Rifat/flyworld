@@ -19,6 +19,7 @@ Route::get('/tourist-packages', function () {
 Route::controller(FrontendVisaServiceController::class)->group(function () {
     Route::get('/visa-service', 'visaServicePage')->name('visa-service-page');
     Route::post('/visa-service', 'getVisaServiceData')->name('get-visa-service-data');
+    Route::get('/refund-policy', 'refundPolicy')->name('refund-policy');
 });
 
 Route::middleware('auth')->group(function () {

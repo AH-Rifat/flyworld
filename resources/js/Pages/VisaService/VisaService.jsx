@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import DocumentRequirementSection from "./DocumentRequirementSection";
 import { useForm } from "@inertiajs/react";
 import { toast } from "react-toastify";
+import VisaListModal from "./VisaListModal";
 
 const VisaService = ({
     allCountries,
@@ -115,15 +116,11 @@ const VisaService = ({
                                     <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                         Fast Track Application
                                     </li>
-                                    <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                                        Sticker Visa
-                                    </li>
-                                    <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                                        On Arrival Visa
-                                    </li>
-                                    <li className="w-full px-4 py-2 rounded-b-lg">
-                                        e-Visa
-                                    </li>
+                                    <VisaListModal listName={"Sticker Visa"} />
+                                    <VisaListModal
+                                        listName={"On Arrival Visa"}
+                                    />
+                                    <VisaListModal listName={"e-Visa"} />
                                 </ul>
                             </div>
                         </div>

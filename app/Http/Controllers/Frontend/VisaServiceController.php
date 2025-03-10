@@ -41,8 +41,12 @@ class VisaServiceController extends Controller
         $importantContact = ImportantContactAndLink::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->get();
         $sampleDocumentsAndPhoto = SampleDocumentsAndPhotos::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->get();
         $documentsRequirements = VisaDocumentsRequirements::where('country_id', $request->country_id)->where('visa_type_id', $request->visa_type_id)->with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'description')->get();
-        // dd($documentsRequirements);
 
         return Inertia::render('VisaService/VisaService', compact('allCountries', 'allVisaTypes', 'visaTypeDescription', 'elegibilitys', 'beforeDepartureRequirments', 'remarks', 'visaFeeAndServiceCharge', 'visaProcessingTime', 'importantContact', 'sampleDocumentsAndPhoto', 'documentsRequirements'));
+    }
+
+    public function refundPolicy()
+    {
+        return Inertia::render('RefundPolicy/RefundPolicyPage');
     }
 }
