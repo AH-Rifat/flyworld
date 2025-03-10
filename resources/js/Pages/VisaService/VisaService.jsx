@@ -9,6 +9,7 @@ import Button from "../components/ui/Button";
 import { FaPrint } from "react-icons/fa6";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 const VisaService = ({
     allCountries,
@@ -218,9 +219,9 @@ const VisaService = ({
                                     </h2>
                                     <div className="p-6">
                                         <p>
-                                            {
+                                            {HTMLReactParser(
                                                 visaFeeAndServiceCharge?.fee_and_service_charges
-                                            }
+                                            )}
                                         </p>
                                     </div>
                                 </section>
@@ -281,9 +282,9 @@ const VisaService = ({
                                     </h2>
                                     <div className="p-6">
                                         <p>
-                                            {
+                                            {HTMLReactParser(
                                                 beforeDepartureRequirments?.before_departure_requirements
-                                            }
+                                            )}
                                         </p>
                                     </div>
                                 </section>

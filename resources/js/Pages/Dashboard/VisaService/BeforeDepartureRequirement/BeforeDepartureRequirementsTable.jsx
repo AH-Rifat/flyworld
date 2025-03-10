@@ -1,4 +1,5 @@
 import { Link, router } from "@inertiajs/react";
+import HTMLReactParser from "html-react-parser/lib/index";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -77,11 +78,12 @@ const BeforeDepartureRequirementsTable = ({ data, onEdit }) => {
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
-                                            ? item.before_departure_requirements
-                                            : item.before_departure_requirements.slice(
-                                                  0,
-                                                  50
-                                              )}
+                                            ? HTMLReactParser(
+                                                  item.before_departure_requirements
+                                              )
+                                            : HTMLReactParser(
+                                                  item.before_departure_requirements
+                                              ).slice(0, 50)}
                                         {item.before_departure_requirements
                                             .length > 50 && (
                                             <button

@@ -1,6 +1,7 @@
 import { Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
     const [isReadMore, setIsReadMore] = useState(false);
@@ -77,11 +78,12 @@ const VisaFeesServiceChargesTable = ({ data, onEdit }) => {
                                     </td>
                                     <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
                                         {isReadMore
-                                            ? item.fee_and_service_charges
-                                            : item.fee_and_service_charges.slice(
-                                                  0,
-                                                  50
-                                              )}
+                                            ? HTMLReactParser(
+                                                  item.fee_and_service_charges
+                                              )
+                                            : HTMLReactParser(
+                                                  item.fee_and_service_charges
+                                              ).slice(0, 50)}
                                         {item.fee_and_service_charges.length >
                                             50 && (
                                             <button

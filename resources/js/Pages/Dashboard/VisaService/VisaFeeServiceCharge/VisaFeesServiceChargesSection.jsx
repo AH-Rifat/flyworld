@@ -1,11 +1,11 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import TextariaField from "../../../components/ui/TextariaField";
 import SelectCountryList from "../../../components/SelectCountryList";
 import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
 import VisaFeesServiceChargesTable from "./VisaFeesServiceChargesTable";
 import { toast } from "react-toastify";
+import TextEditor from "../../../components/ui/TextEditor";
 
 const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
     const { data, setData, post, put, errors, reset, processing } = useForm({
@@ -85,13 +85,12 @@ const VisaFeesServiceChargesSection = ({ feeAndServiceChargesData }) => {
                         <p className="text-red-600">{errors.visa_type_id}</p>
                     )}
                     <div className="flex-1/2">
-                        <TextariaField
-                            placeholder="Write Visa Fees and Service Charges here..."
+                        <TextEditor
                             value={data.fee_and_service_charges}
-                            onChange={(e) =>
+                            onChange={(newData) =>
                                 setData(
                                     "fee_and_service_charges",
-                                    e.target.value
+                                    newData
                                 )
                             }
                         />

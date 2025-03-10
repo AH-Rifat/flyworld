@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import SelectCountryList from "../../../components/SelectCountryList";
 import SelectVisaTypeList from "../../../components/SelectVisaTypeList";
 import Button from "../../../components/ui/Button";
-import TextariaField from "../../../components/ui/TextariaField";
 import BeforeDepartureRequirementsTable from "./BeforeDepartureRequirementsTable";
+import TextEditor from "../../../components/ui/TextEditor";
 
 const BeforeDepartureRequirementsSection = ({
     beforeDepartureRequirementsData,
@@ -21,6 +21,8 @@ const BeforeDepartureRequirementsSection = ({
 
     const addSubmit = (e) => {
         e.preventDefault();
+        console.log(data);
+
         post("/create-before-departure-requirements", {
             preserveScroll: true,
             onSuccess: () => {
@@ -90,13 +92,12 @@ const BeforeDepartureRequirementsSection = ({
                         <p className="text-red-600">{errors.visa_type_id}</p>
                     )}
                     <div className="flex-1/2">
-                        <TextariaField
-                            placeholder="Write Before Departure Requirements here..."
+                        <TextEditor
                             value={data.before_departure_requirements}
-                            onChange={(e) =>
+                            onChange={(newData) =>
                                 setData(
                                     "before_departure_requirements",
-                                    e.target.value
+                                    newData
                                 )
                             }
                         />
