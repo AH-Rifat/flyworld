@@ -1,11 +1,11 @@
 import { Link } from "@inertiajs/react";
 
-const Pagination = ({data}) => {
+const Pagination = ({ data }) => {
     return (
         <>
             {data?.links?.length > 1 && (
-                <nav className="my-4">
-                    <ul className="flex items-center justify-center -space-x-px h-8 text-sm">
+                <nav className="overflow-y-scroll">
+                    <ul className="flex p-8  items-center justify-center -space-x-px h-8 text-sm">
                         {/* Previous Button */}
                         {data?.links[0]?.url && (
                             <li>

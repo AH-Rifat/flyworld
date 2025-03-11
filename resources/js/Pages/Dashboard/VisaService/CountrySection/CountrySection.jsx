@@ -1,7 +1,6 @@
-import InputField from "../../components/ui/InputField";
-import LabelInput from "../../components/ui/LabelInput";
-import Button from "../../components/ui/Button";
-import CountryTable from "./Tables/CountryTable";
+import InputField from "../../../components/ui/InputField";
+import Button from "../../../components/ui/Button";
+import CountryTable from "./CountryTable";
 import { useForm } from "@inertiajs/react";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -15,10 +14,13 @@ const CountrySection = ({ countiesData }) => {
 
     const addCountry = (e) => {
         e.preventDefault();
+        console.log(data);
 
         post("/create-country", {
             onSuccess: () => {
-                toast.success("Country added");
+                toast.success("Country added", {
+                    position: "top-center",
+                });
                 reset();
             },
             onError: () =>
@@ -66,10 +68,15 @@ const CountrySection = ({ countiesData }) => {
                                 setData("country_name", e.target.value)
                             }
                         />
+                        {errors.country_name && (
+                            <p className="text-red-500">
+                                {errors.country_name}
+                            </p>
+                        )}
                     </div>
                     <div>
                         <Button type={"submit"} disabled={processing}>
-                            {isEdit ? "Edit Country Name" : "Add Country"}
+                            {isEdit ? "Update" : "Add"}
                         </Button>
                     </div>
                 </form>
