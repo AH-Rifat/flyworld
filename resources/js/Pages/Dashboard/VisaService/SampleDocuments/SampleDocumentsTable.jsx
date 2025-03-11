@@ -1,5 +1,6 @@
-import { Link, router } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import { toast } from "react-toastify";
+import Pagination from "../../../components/ui/Pagination";
 
 const SampleDocumentsTable = ({ data, onEdit }) => {
     const onDelete = (id) => {
@@ -107,38 +108,7 @@ const SampleDocumentsTable = ({ data, onEdit }) => {
             </div>
 
             {/* Pagination */}
-            {data?.links?.length > 1 && (
-                <div className="mt-6 flex justify-center">
-                    <nav className="flex gap-1">
-                        {data?.links.map((link, index) => (
-                            <span key={index}>
-                                {link.url ? (
-                                    <Link
-                                        href={link.url}
-                                        className={`px-3.5 py-2 text-sm font-medium rounded-md
-                                            ${
-                                                link.active
-                                                    ? "bg-sky-500 text-white dark:bg-sky-600"
-                                                    : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-                                            }`}
-                                        dangerouslySetInnerHTML={{
-                                            __html: link.label,
-                                        }}
-                                    />
-                                ) : (
-                                    <span
-                                        className={`px-3.5 py-2 text-sm font-medium text-gray-400 dark:text-gray-600
-                                                   cursor-default`}
-                                        dangerouslySetInnerHTML={{
-                                            __html: link.label,
-                                        }}
-                                    />
-                                )}
-                            </span>
-                        ))}
-                    </nav>
-                </div>
-            )}
+            <Pagination data={data} />
         </>
     );
 };
