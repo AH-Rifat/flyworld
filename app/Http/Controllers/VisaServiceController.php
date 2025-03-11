@@ -22,9 +22,9 @@ class VisaServiceController extends Controller
 {
     public function visaTypeCountryList()
     {
-        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
-        $countries = Country::latest()->select('id', 'country_name')->paginate(10);
+        $countries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->paginate(10);
         $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
         $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->latest()->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
         $remarks = Remark::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
@@ -40,7 +40,7 @@ class VisaServiceController extends Controller
     public function createCountry(Request $request)
     {
         $validation = $request->validate([
-            'country_name' => ['required', 'string', 'max:255'],
+            'country_name' => ['required', 'exists:countries,country_name', 'string', 'max:255'],
         ]);
         Country::create($validation);
         return redirect()->back();
@@ -72,7 +72,7 @@ class VisaServiceController extends Controller
 
     public function getAllCountryData()
     {
-        $countries = Country::latest()->select('id', 'country_name')->get();
+        $countries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         return Inertia::render('components/SelectCountryList', [
             'countries' => $countries
         ]);
@@ -304,7 +304,7 @@ class VisaServiceController extends Controller
 
     public function getSampleDocumentsAndPhotos()
     {
-        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
         $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
         return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries', 'allVisaTypes'));
@@ -378,7 +378,7 @@ class VisaServiceController extends Controller
 
     public function getImportantContactAndLinks()
     {
-        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
         $importantContactAndLinks = ImportantContactAndLink::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->paginate(10);
         return Inertia::render('Dashboard/VisaService/ImportantContactAndLinks/ImportantContactSection', compact('importantContactAndLinks', 'allCountries', 'allVisaTypes'));
@@ -429,7 +429,7 @@ class VisaServiceController extends Controller
 
     public function getVisaDocumentsRequirements()
     {
-        $allCountries = Country::latest()->select('id', 'country_name')->get();
+        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
         $documentRequirementData = VisaDocumentsRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'description')->paginate(10);
         return Inertia::render('Dashboard/VisaService/DocumentRequirements/DocumentRequirementSection', compact('documentRequirementData', 'allCountries', 'allVisaTypes'));

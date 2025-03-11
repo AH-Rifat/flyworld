@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 const VisaListModal = ({ listName }) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredData, setFilteredData] = useState([]);
 
     const { impotantDocumentInfo } = usePage().props;
 
@@ -16,13 +18,43 @@ const VisaListModal = ({ listName }) => {
     };
 
     useEffect(() => {
-        document.body.classList.toggle("overflow-hidden", isOpenModal);
-        return () => document.body.classList.remove("overflow-hidden");
+        if (isOpenModal) {
+            document.body.classList.add("overflow-hidden");
+        } else {
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        return () => {
+            document.body.classList.remove("overflow-hidden");
+        };
     }, [isOpenModal]);
 
-    const filteredData = impotantDocumentInfo.filter(
-        (data) => data.visa_type.visa_type === listName
-    );
+    useEffect(() => {
+        const filtered = impotantDocumentInfo
+            .filter((data) => {
+                const matchesListName = data.visa_type.visa_type === listName;
+                const matchesSearchQuery =
+                    data.country.country_name
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase()) ||
+                    data.visa_type.visa_type
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase()) ||
+                    data.remarks
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase());
+
+                return matchesListName && matchesSearchQuery;
+            })
+            .sort((a, b) => {
+                // Sort by country_name in ascending order
+                return a.country.country_name.localeCompare(
+                    b.country.country_name
+                );
+            });
+
+        setFilteredData(filtered);
+    }, [searchQuery, impotantDocumentInfo, listName]);
 
     return (
         <>
@@ -52,28 +84,46 @@ const VisaListModal = ({ listName }) => {
                             <h3 className="text-xl font-semibold text-sky-900 dark:text-white">
                                 Country List
                             </h3>
-                            <button
-                                type="button"
-                                onClick={handleClose}
-                                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                <svg
-                                    className="w-3 h-3"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 14 14"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center space-x-2">
+                                    <label htmlFor="search" className="sr-only">
+                                        Search
+                                    </label>
+                                    <input
+                                        id="search"
+                                        type="search"
+                                        placeholder="Search Country"
+                                        className="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+                                        onChange={(e) =>
+                                            setSearchQuery(e.target.value)
+                                        }
+                                        value={searchQuery}
+                                        aria-label="Search"
                                     />
-                                </svg>
-                                <span className="sr-only">Close modal</span>
-                            </button>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={handleClose}
+                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                >
+                                    <svg
+                                        className="w-3 h-3"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                        />
+                                    </svg>
+                                    <span className="sr-only">Close modal</span>
+                                </button>
+                            </div>
                         </div>
 
                         <div className="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[60vh]">
