@@ -22,16 +22,17 @@ class VisaServiceController extends Controller
 {
     public function visaServicePage()
     {
-        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
+        // $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
+        $allCountries = VisaTypeDescription::with(['country'])->select('id', 'country_id')->groupBy('country_id')->get();
         $getVisaTypeFromDescriptionData = VisaTypeDescription::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id')->get();
-        $impotantDocumentInfo = ImportantDocumentInfo::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'description', 'remarks')->get();
 
+        $impotantDocumentInfo = ImportantDocumentInfo::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'description', 'remarks')->get();
         return Inertia::render('VisaService/VisaService', compact('allCountries', 'getVisaTypeFromDescriptionData', 'impotantDocumentInfo'));
     }
 
     public function getVisaServiceData(Request $request)
     {
-        $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
+        $allCountries = VisaTypeDescription::with(['country'])->select('id', 'country_id')->groupBy('country_id')->get();
         $getVisaTypeFromDescriptionData = VisaTypeDescription::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id')->get();
         $impotantDocumentInfo = ImportantDocumentInfo::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'description', 'remarks')->get();
 

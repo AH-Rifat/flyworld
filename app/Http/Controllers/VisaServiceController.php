@@ -40,8 +40,9 @@ class VisaServiceController extends Controller
     public function createCountry(Request $request)
     {
         $validation = $request->validate([
-            'country_name' => ['required', 'exists:countries,country_name', 'string', 'max:255'],
+            'country_name' => ['required', 'string', 'unique:countries,country_name', 'max:255'],
         ]);
+
         Country::create($validation);
         return redirect()->back();
     }
@@ -49,7 +50,7 @@ class VisaServiceController extends Controller
     public function editCountry(Request $request, $id)
     {
         $validation = $request->validate([
-            'country_name' => ['required', 'string', 'max:255'],
+            'country_name' => ['required', 'string', 'unique:countries,country_name', 'max:255'],
         ]);
         $country = Country::find($id);
         $country->update($validation);

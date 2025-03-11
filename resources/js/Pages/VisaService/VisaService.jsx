@@ -10,6 +10,7 @@ import { FaPrint } from "react-icons/fa6";
 import { useReactToPrint } from "react-to-print";
 import { useRef, useState } from "react";
 import HTMLReactParser from "html-react-parser/lib/index";
+import Select from "react-select";
 
 const VisaService = ({
     allCountries,
@@ -34,14 +35,18 @@ const VisaService = ({
     const contentRef = useRef(null);
     const reactToPrintFn = useReactToPrint({ contentRef });
 
-    const handleCountryChange = (e) => {
+    const handleCountryChange = (selectedOption) => {
         const filterData = getVisaTypeFromDescriptionData?.filter((item) => {
-            if (item.country_id == e.target.value) {
-                setData("country_id", e.target.value);
+            if (item.country_id == selectedOption.value) {
+                setData("country_id", selectedOption.value);
                 return item;
             }
         });
         setShowVisaTypeFromCountryData(filterData);
+    };
+
+    const handleVisaTypeChange = (selectedOption) => {
+        setData("visa_type_id", selectedOption.value);
     };
 
     const handleSearch = (e) => {
@@ -61,6 +66,16 @@ const VisaService = ({
         });
     };
 
+    let countryOptions = allCountries?.map((country) => ({
+        value: country.id,
+        label: country.country.country_name,
+    }));
+
+    const visaTypeOptions = showVisaTypeFromCountryData?.map((visaType) => ({
+        value: visaType.visa_type_id,
+        label: visaType.visa_type.visa_type,
+    }));
+
     return (
         <>
             <Header />
@@ -79,23 +94,16 @@ const VisaService = ({
                                 >
                                     Select your country
                                 </label>
-
-                                <select
+                                <Select
                                     id="countries"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    value={data.country_id}
+                                    options={countryOptions}
+                                    value={countryOptions.find(
+                                        (option) =>
+                                            option.value === data.country_id
+                                    )}
                                     onChange={handleCountryChange}
-                                >
-                                    <option value="">Select Country</option>
-                                    {allCountries?.map((country) => (
-                                        <option
-                                            key={country.id}
-                                            value={country.id}
-                                        >
-                                            {country.country_name}
-                                        </option>
-                                    ))}
-                                </select>
+                                    placeholder="Select Country"
+                                />
                                 {errors.country_id && (
                                     <span className="text-red-600">
                                         {errors.country_id}
@@ -109,27 +117,16 @@ const VisaService = ({
                                 >
                                     Select Category
                                 </label>
-                                
-                                <select
+                                <Select
                                     id="category"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    value={data.visa_type_id}
-                                    onChange={(e) =>
-                                        setData("visa_type_id", e.target.value)
-                                    }
-                                >
-                                    <option value={""}>Select Category</option>
-                                    {showVisaTypeFromCountryData?.map(
-                                        (visaType) => (
-                                            <option
-                                                key={visaType.id}
-                                                value={visaType.visa_type_id}
-                                            >
-                                                {visaType.visa_type.visa_type}
-                                            </option>
-                                        )
+                                    options={visaTypeOptions}
+                                    value={visaTypeOptions.find(
+                                        (option) =>
+                                            option.value === data.visa_type_id
                                     )}
-                                </select>
+                                    onChange={handleVisaTypeChange}
+                                    placeholder="Select Category"
+                                />
                                 {errors.visa_type_id && (
                                     <span className="text-red-600">
                                         {errors.visa_type_id}
@@ -189,14 +186,6 @@ const VisaService = ({
                                             </div>
                                         ))}
                                     </div>
-                                    {/* <div className="text-center mt-8">
-                                    <button
-                                        type="button"
-                                        className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
-                                    >
-                                        Apply Now
-                                    </button>
-                                </div> */}
                                 </div>
                             </div>
                         )}
