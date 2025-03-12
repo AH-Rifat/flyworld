@@ -2,9 +2,11 @@ import { useState } from "react";
 import logo from "../../../../public/assets/img/fly-world-logo.png";
 import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { url, component } = usePage();
+
     return (
         <>
             <section className="hidden md:block text-white text-[.6rem] font-semibold uppercase bg-sky-500">
@@ -72,8 +74,11 @@ const Header = () => {
                             <li>
                                 <Link
                                     href="/"
-                                    className="block py-2 px-3 text-white bg-sky-700 rounded-sm md:bg-transparent md:text-sky-700 md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent"
-                                    aria-current="page"
+                                    className={`block py-2 px-3 ${
+                                        component.startsWith("Home")
+                                            ? "text-white bg-sky-700 md:bg-transparent md:text-sky-700"
+                                            : ""
+                                    } rounded-sm md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent`}
                                 >
                                     Home
                                 </Link>
@@ -89,7 +94,11 @@ const Header = () => {
                             <li>
                                 <Link
                                     href="/visa-service"
-                                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 dark:text-white md:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                    className={`block py-2 px-3 ${
+                                        url.startsWith("/visa-service")
+                                            ? "text-white bg-sky-700 md:bg-transparent md:text-sky-700"
+                                            : ""
+                                    } rounded-sm md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent`}
                                 >
                                     Visa Service
                                 </Link>
@@ -97,15 +106,23 @@ const Header = () => {
                             <li>
                                 <Link
                                     href="/tourist-packages"
-                                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 dark:text-white md:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                    className={`block py-2 px-3 ${
+                                        url.startsWith("/tourist-packages")
+                                            ? "text-white bg-sky-700 md:bg-transparent md:text-sky-700"
+                                            : ""
+                                    } rounded-sm md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent`}
                                 >
                                     Tourist Packages
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    href="about-us"
-                                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 dark:text-white md:dark:hover:text-sky-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                    href="/about-us"
+                                    className={`block py-2 px-3 ${
+                                        url.startsWith("/about-us")
+                                            ? "text-white bg-sky-700 md:bg-transparent md:text-sky-700"
+                                            : ""
+                                    } rounded-sm md:p-0 md:dark:text-sky-500 dark:bg-sky-600 md:dark:bg-transparent`}
                                 >
                                     About Us
                                 </Link>

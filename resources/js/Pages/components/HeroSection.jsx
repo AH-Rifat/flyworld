@@ -4,22 +4,21 @@ import video_hero_section from "../../../../public/assets/video/video_hero_secti
 const HeroSection = () => {
     return (
         <>
-            <div className="relative flex justify-center items-center h-screen overflow-hidden">
+            <div className="relative flex justify-center items-center md:h-screen overflow-hidden">
                 {/* Video Background */}
                 <video
                     autoPlay
                     loop
                     muted
                     className="absolute z-0 top-0 left-0 w-full h-full object-cover"
-                    style={{ minWidth: "100%", minHeight: "100%" }}
                 >
                     <source src={video_hero_section} type="video/mp4" />
-                    Your browser does not support the video tag.
+                    {/* Your browser does not support the video tag. */}
                 </video>
 
                 {/* Form Container */}
-                <div className="w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 my-12 mx-auto relative z-10 overflow-hidden">
-                    <div className="block max-w-full p-4 sm:p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div className="w-72 md:w-1/2 lg:w-1/3 my-12 mx-auto relative z-10 ">
+                    <div className="block max-w-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <form action="" className="uppercase">
                             {/* Trip Type Radio Buttons */}
                             <fieldset className="flex flex-wrap items-center justify-center mt-4 mb-6 gap-3 sm:gap-4">
@@ -175,7 +174,7 @@ const HeroSection = () => {
                             </div>
 
                             {/* Class Type Radio Buttons */}
-                            <fieldset className="flex flex-wrap items-center justify-center my-6 gap-3 sm:gap-4">
+                            <fieldset className="flex flex-wrap items-center justify-center my-4 gap-3 sm:gap-4">
                                 <legend className="sr-only">Class Type</legend>
                                 <div className="flex items-center">
                                     <input
@@ -211,7 +210,7 @@ const HeroSection = () => {
 
                             {/* Search Button */}
                             <div className="flex items-center justify-center">
-                                <button className="text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 font-semibold rounded-lg text-lg px-10 py-2 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">
+                                <button className="text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 font-semibold rounded-lg text-sm md:text-lg px-10 py-2 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">
                                     Search
                                 </button>
                             </div>

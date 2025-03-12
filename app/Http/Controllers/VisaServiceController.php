@@ -391,10 +391,10 @@ class VisaServiceController extends Controller
             'country_id' => 'required|exists:countries,id',
             'visa_type_id' => 'required|exists:visa_types,id',
             'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'address' => 'required|string',
             'email' => 'nullable|email|max:255',
-            'phone' => ['required'],
-            'office_hours' => 'nullable|string|max:255',
+            'phone' => 'nullable',
+            'office_hours' => 'nullable|string',
         ]);
 
         ImportantContactAndLink::create($validated);
@@ -408,10 +408,10 @@ class VisaServiceController extends Controller
             'country_id' => 'required|exists:countries,id',
             'visa_type_id' => 'required|exists:visa_types,id',
             'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'address' => 'required|string',
             'email' => 'nullable|email|max:255',
-            'phone' => ['required'],
-            'office_hours' => 'nullable|string|max:255',
+            'phone' => 'nullable',
+            'office_hours' => 'nullable|string',
         ]);
 
         $importantContactAndLink = ImportantContactAndLink::find($id);
