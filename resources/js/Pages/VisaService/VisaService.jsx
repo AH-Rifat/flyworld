@@ -50,8 +50,6 @@ const VisaService = ({
     };
 
     const handleSearch = (e) => {
-        console.log(data);
-
         e.preventDefault();
         post("/visa-service", {
             preserveScroll: true,

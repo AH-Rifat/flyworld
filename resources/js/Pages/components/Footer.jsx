@@ -187,7 +187,7 @@ const Footer = () => {
                                             Dhaka Office: <br />
                                             Sat Masjid Super Market, <br />
                                             Mohammadpur, Dhaka- 1207 <br />{" "}
-                                            Bangladesh, Phone: +88020000000
+                                            Bangladesh, Phone: +8801811-444430
                                         </p>
                                     </li>
                                     <li className="mb-4">
@@ -242,7 +242,7 @@ const Footer = () => {
                     </span>
                     <div className="flex sm:justify-center justify-center sm:mt-0 mt-4">
                         <a
-                            href="#"
+                            href="https://www.facebook.com/share/18Q2P5D9Cf/"
                             className="text-sky-500 hover:text-sky-900 dark:hover:text-white"
                         >
                             <FaFacebookSquare className="w-8 h-8" />

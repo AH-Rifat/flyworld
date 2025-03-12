@@ -12,7 +12,7 @@ const Header = () => {
                     <div className="flex items-center space-x-3 rtl:space-x-reverse">
                         <div className="flex items-center gap-1.5">
                             <FaSquarePhone />
-                            <p> +880100-000-00-00 </p>
+                            <p> +8801811-444430</p>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <MdEmail />
