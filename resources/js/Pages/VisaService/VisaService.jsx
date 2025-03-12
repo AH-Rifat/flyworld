@@ -50,6 +50,8 @@ const VisaService = ({
     };
 
     const handleSearch = (e) => {
+        console.log(data);
+
         e.preventDefault();
         post("/visa-service", {
             preserveScroll: true,
@@ -67,7 +69,7 @@ const VisaService = ({
     };
 
     let countryOptions = allCountries?.map((country) => ({
-        value: country.id,
+        value: country.country_id,
         label: country.country.country_name,
     }));
 
