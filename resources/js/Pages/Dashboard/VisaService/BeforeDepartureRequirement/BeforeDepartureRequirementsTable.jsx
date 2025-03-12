@@ -83,8 +83,11 @@ const BeforeDepartureRequirementsTable = ({ data, onEdit }) => {
                                                   item.before_departure_requirements
                                               )
                                             : HTMLReactParser(
-                                                  item.before_departure_requirements
-                                              ).slice(0, 50)}
+                                                  item.before_departure_requirements.slice(
+                                                      0,
+                                                      50
+                                                  )
+                                              )}
                                         {item.before_departure_requirements
                                             .length > 50 && (
                                             <button

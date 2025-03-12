@@ -25,11 +25,16 @@ const SampleDocumentsSection = ({ sampleDocumentsAndPhotos }) => {
         post("/create-sample-documents-and-photos", {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Sample Documents and Photos added");
+                toast.success("Sample Documents and Photos added", {
+                    position: "top-center",
+                });
                 reset();
                 setImagePreview(null); // Reset image preview
             },
-            onError: () => toast.error("Something went wrong"),
+            onError: () =>
+                toast.error("Something went wrong", {
+                    position: "top-center",
+                }),
         });
     };
 
@@ -38,12 +43,17 @@ const SampleDocumentsSection = ({ sampleDocumentsAndPhotos }) => {
         post(`/update-sample-documents-and-photos/${editId}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Sample Documents and Photos edited");
+                toast.success("Sample Documents and Photos edited", {
+                    position: "top-center",
+                });
                 setIsEdit(false);
                 reset();
                 setImagePreview(null); // Reset image preview
             },
-            onError: () => toast.error("Something went wrong"),
+            onError: () =>
+                toast.error("Something went wrong", {
+                    position: "top-center",
+                }),
         });
     };
 
@@ -55,7 +65,9 @@ const SampleDocumentsSection = ({ sampleDocumentsAndPhotos }) => {
             title: item.title,
         });
         setEditId(item.id);
-        setImagePreview(item.image ? `/storage/${item.image}` : null); // Set image preview for editing
+        setImagePreview(
+            item.image ? `/images/sample-documents/${item.image}` : null
+        ); // Set image preview for editing
     };
 
     const handleImageChange = (e) => {
