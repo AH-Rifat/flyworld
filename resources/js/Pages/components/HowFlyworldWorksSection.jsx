@@ -27,7 +27,7 @@ const HowFlyworldWorksSection = () => {
                 </div>
 
                 {/* Desktop Version */}
-                <div className="hidden md:block py-24 h-full">
+                <div className="hidden md:block py-24 h-full overflow-hidden">
                     {/* top icon animation */}
                     <div
                         data-aos="fade-down"
