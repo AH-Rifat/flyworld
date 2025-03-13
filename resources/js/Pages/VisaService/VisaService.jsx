@@ -89,7 +89,7 @@ const VisaService = ({
                     Visa Service
                 </h1>
 
-                <div className="card py-2 mx-auto w-72 md:w-2/3">
+                <div className="card py-2 mx-auto w-full md:w-2/3">
                     <form className="p-3" onSubmit={handleSearch}>
                         <div className="flex flex-col md:flex-row justify-between place-items-center gap-5 md:px-20">
                             <div className="w-full md:w-96">
@@ -197,9 +197,9 @@ const VisaService = ({
                     </section>
 
                     <div className="flex flex-col lg:flex-row gap-8 m-10">
-                        <div className="flex flex-col gap-8">
+                        <div className="flex flex-col gap-8 w-full lg:w-1/2">
                             {elegibilitys && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Eligibility to Apply for Visa
                                     </h2>
@@ -212,7 +212,7 @@ const VisaService = ({
                             )}
 
                             {documentsRequirements?.length > 0 && (
-                                <section className={`card h-fit`}>
+                                <section className={`card`}>
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Documents Requirements
                                     </h2>
@@ -225,7 +225,7 @@ const VisaService = ({
                             )}
 
                             {visaFeeAndServiceCharge && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Visa Fees & Service Charges
                                     </h2>
@@ -240,7 +240,7 @@ const VisaService = ({
                             )}
 
                             {visaProcessingTime && (
-                                <section className="card h-fit print:mt-24">
+                                <section className="card print:mt-24">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Processing Time
                                     </h2>
@@ -255,7 +255,7 @@ const VisaService = ({
                             )}
 
                             {sampleDocumentsAndPhoto?.length > 0 && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Sample Documents & Photos
                                     </h2>
@@ -286,9 +286,9 @@ const VisaService = ({
                             )}
                         </div>
 
-                        <div className="flex flex-col gap-8">
+                        <div className="flex flex-col gap-8 w-full lg:w-1/2">
                             {beforeDepartureRequirments && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Before Departure Requirements
                                     </h2>
@@ -303,7 +303,7 @@ const VisaService = ({
                             )}
 
                             {importantContact?.length > 0 && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Important Contacts & Links
                                     </h2>
@@ -372,7 +372,7 @@ const VisaService = ({
                             )}
 
                             {remarks && (
-                                <section className="card h-fit">
+                                <section className="card">
                                     <h2 className="font-semibold bg-sky-200 p-2">
                                         Remarks
                                     </h2>
