@@ -66,10 +66,15 @@ const VisaService = ({
         });
     };
 
-    let countryOptions = allCountries?.map((country) => ({
-        value: country.country_id,
-        label: country.country.country_name,
-    }));
+    const countryOptions = allCountries
+        ?.slice() // Create a shallow copy of the array to avoid mutating the original array
+        .sort((a, b) =>
+            a.country.country_name.localeCompare(b.country.country_name)
+        ) // Sort alphabetically by country name
+        .map((country) => ({
+            value: country.country_id,
+            label: country.country.country_name,
+        }));
 
     const visaTypeOptions = showVisaTypeFromCountryData?.map((visaType) => ({
         value: visaType.visa_type_id,
