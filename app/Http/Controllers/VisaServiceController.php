@@ -28,10 +28,23 @@ class VisaServiceController extends Controller
         $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
         $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
         $remarks = Remark::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
-        $eligibilitys = Eligibility::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->paginate(10);
-        $visaProcessingTimes = VisaProcessingTime::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'processing_time')->paginate(10);
-        $beforeDepartureRequirements = BeforeDepartureRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'before_departure_requirements')->paginate(10);
-        $feeAndServiceCharges = FeeAndServiceCharges::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'fee_and_service_charges')->paginate(10);
+
+        $eligibilitys = Eligibility::with(['country' => function ($query) {
+            $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->paginate(10);
+
+        $visaProcessingTimes = VisaProcessingTime::with(['country' => function ($query) {
+            $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'processing_time')->paginate(10);
+
+        $beforeDepartureRequirements = BeforeDepartureRequirements::with(['country' => function ($query) {
+            $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'before_departure_requirements')->paginate(10);
+
+        $feeAndServiceCharges = FeeAndServiceCharges::with(['country' => function ($query) {
+            $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'fee_and_service_charges')->paginate(10);
+
         $importantDocumentInfo = ImportantDocumentInfo::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'description', 'remarks')->paginate(10);
 
         return Inertia::render('Dashboard/VisaService/CreateVisaTypeCountryNamePage', compact('countries', 'allCountries', 'allVisaTypes', 'visaTypes', 'visaTypeDescriptions', 'remarks', 'eligibilitys', 'visaProcessingTimes', 'beforeDepartureRequirements', 'feeAndServiceCharges', 'importantDocumentInfo'));
@@ -307,7 +320,11 @@ class VisaServiceController extends Controller
     {
         $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
-        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
+
+        $sampleDocumentsAndPhotos = SampleDocumentsAndPhotos::with(['country' => function ($query) {
+            return $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'title', 'image')->paginate(10);
+
         return Inertia::render('Dashboard/VisaService/SampleDocuments/SampleDocumentsSection', compact('sampleDocumentsAndPhotos', 'allCountries', 'allVisaTypes'));
     }
 
@@ -381,7 +398,11 @@ class VisaServiceController extends Controller
     {
         $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
-        $importantContactAndLinks = ImportantContactAndLink::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->paginate(10);
+
+        $importantContactAndLinks = ImportantContactAndLink::with(['country' => function ($query) {
+            return $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'title', 'address', 'email', 'phone', 'office_hours')->paginate(10);
+
         return Inertia::render('Dashboard/VisaService/ImportantContactAndLinks/ImportantContactSection', compact('importantContactAndLinks', 'allCountries', 'allVisaTypes'));
     }
 
@@ -432,7 +453,11 @@ class VisaServiceController extends Controller
     {
         $allCountries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->get();
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type', 'visa_description')->get();
-        $documentRequirementData = VisaDocumentsRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'title', 'description')->paginate(10);
+
+        $documentRequirementData = VisaDocumentsRequirements::with(['country' => function ($query) {
+            $query->orderBy('country_name', 'asc');
+        }, 'visaType'])->select('id', 'country_id', 'visa_type_id', 'title', 'description')->paginate(10);
+
         return Inertia::render('Dashboard/VisaService/DocumentRequirements/DocumentRequirementSection', compact('documentRequirementData', 'allCountries', 'allVisaTypes'));
     }
 
