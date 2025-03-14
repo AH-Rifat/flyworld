@@ -62,63 +62,71 @@ const VisaTypeDiscriptionTable = ({ data, onEdit }) => {
                                 </td>
                             </tr>
                         ) : (
-                            data?.data.map((item, index) => (
-                                <tr
-                                    key={item.id}
-                                    className="bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800"
-                                >
-                                    <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
-                                        {index + 1}
-                                    </td>
-                                    <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {item.country.country_name}
-                                    </td>
-                                    <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {item.visa_type.visa_type}
-                                    </td>
-                                    <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
-                                        {isReadMore
-                                            ? item.description
-                                            : item.description.slice(0, 50)}
-                                        {item.description.length > 50 && (
-                                            <button
-                                                onClick={() =>
-                                                    setIsReadMore(!isReadMore)
-                                                }
-                                                className="px-2 py-1 text-sm font-medium bg-sky-500/10 text-sky-700
-                                               rounded-md hover:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500/20
-                                               transition-colors"
-                                            >
-                                                {isReadMore
-                                                    ? "Show Less"
-                                                    : "Read More"}
-                                            </button>
-                                        )}
-                                    </td>
-                                    <td className="px-4 py-3.5">
-                                        <div className="flex items-center justify-center gap-2">
-                                            <button
-                                                onClick={() => onEdit(item)}
-                                                className="px-3 py-1.5 text-sm font-medium bg-sky-500/10 text-sky-700
-                                               rounded-md hover:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500/20
-                                               transition-colors"
-                                            >
-                                                Edit
-                                            </button>
-                                            <button
-                                                onClick={() =>
-                                                    onDelete(item.id)
-                                                }
-                                                className="px-3 py-1.5 text-sm font-medium bg-red-500/10 text-red-700
-                                               rounded-md hover:bg-red-500/20 dark:text-red-400 dark:hover:bg-red-500/20
-                                               transition-colors"
-                                            >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))
+                            data?.data
+                                .sort((a, b) =>
+                                    a.country.country_name.localeCompare(
+                                        b.country.country_name
+                                    )
+                                )
+                                .map((item, index) => (
+                                    <tr
+                                        key={item.id}
+                                        className="bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800"
+                                    >
+                                        <td className="px-4 py-3.5 text-sm text-gray-700 dark:text-gray-300">
+                                            {index + 1}
+                                        </td>
+                                        <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
+                                            {item.country.country_name}
+                                        </td>
+                                        <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
+                                            {item.visa_type.visa_type}
+                                        </td>
+                                        <td className="px-4 py-3.5 text-sm text-gray-900 dark:text-white">
+                                            {isReadMore
+                                                ? item.description
+                                                : item.description.slice(0, 50)}
+                                            {item.description.length > 50 && (
+                                                <button
+                                                    onClick={() =>
+                                                        setIsReadMore(
+                                                            !isReadMore
+                                                        )
+                                                    }
+                                                    className="px-2 py-1 text-sm font-medium bg-sky-500/10 text-sky-700
+                       rounded-md hover:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500/20
+                       transition-colors"
+                                                >
+                                                    {isReadMore
+                                                        ? "Show Less"
+                                                        : "Read More"}
+                                                </button>
+                                            )}
+                                        </td>
+                                        <td className="px-4 py-3.5">
+                                            <div className="flex items-center justify-center gap-2">
+                                                <button
+                                                    onClick={() => onEdit(item)}
+                                                    className="px-3 py-1.5 text-sm font-medium bg-sky-500/10 text-sky-700
+                       rounded-md hover:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500/20
+                       transition-colors"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onClick={() =>
+                                                        onDelete(item.id)
+                                                    }
+                                                    className="px-3 py-1.5 text-sm font-medium bg-red-500/10 text-red-700
+                       rounded-md hover:bg-red-500/20 dark:text-red-400 dark:hover:bg-red-500/20
+                       transition-colors"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
                         )}
                     </tbody>
                 </table>

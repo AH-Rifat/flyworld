@@ -26,8 +26,8 @@ class VisaServiceController extends Controller
         $allVisaTypes = VisaType::latest()->select('id', 'visa_type')->get();
         $countries = Country::select('id', 'country_name')->orderBy('country_name', 'asc')->paginate(10);
         $visaTypes = VisaType::latest()->select('id', 'visa_type')->paginate(10);
-        $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->latest()->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
-        $remarks = Remark::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
+        $visaTypeDescriptions = VisaTypeDescription::with('country', 'visaType')->select('id', 'country_id', 'visa_type_id', 'description')->paginate(10);
+        $remarks = Remark::with(['country', 'visaType'])->select('id', 'country_id', 'visa_type_id', 'remarks')->paginate(10);
         $eligibilitys = Eligibility::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'eligibility_content')->paginate(10);
         $visaProcessingTimes = VisaProcessingTime::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'processing_time')->paginate(10);
         $beforeDepartureRequirements = BeforeDepartureRequirements::with(['country', 'visaType'])->latest()->select('id', 'country_id', 'visa_type_id', 'before_departure_requirements')->paginate(10);

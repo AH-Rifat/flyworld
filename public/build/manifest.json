@@ -84,12 +84,12 @@
     "src": "public/assets/video/video_hero_section.mp4"
   },
   "resources/css/app.css": {
-    "file": "assets/app-qIqNo1VY.css",
+    "file": "assets/app-BQ37Jq5Z.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-ohGGjOyY.js",
+    "file": "assets/app-BjJHxfSC.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
