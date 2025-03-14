@@ -89,7 +89,7 @@ const VisaService = ({
                     Visa Service
                 </h1>
 
-                <div className="card py-2 mx-auto w-full md:w-2/3">
+                <div className="card py-2 mx-10 md:mx-auto md:w-2/3">
                     <form className="p-3" onSubmit={handleSearch}>
                         <div className="flex flex-col md:flex-row justify-between place-items-center gap-5 md:px-20">
                             <div className="w-full md:w-96">
@@ -289,16 +289,14 @@ const VisaService = ({
                         <div className="flex flex-col gap-8 w-full lg:w-1/2">
                             {beforeDepartureRequirments && (
                                 <section className="card">
-                                    <h2 className="font-semibold bg-sky-200 p-2">
+                                    <h2 className="font-semibold bg-sky-200 p-2 text-sm md:text-base">
                                         Before Departure Requirements
                                     </h2>
-                                    <div className="p-6">
-                                        <div>
-                                            {HTMLReactParser(
-                                                beforeDepartureRequirments?.before_departure_requirements
-                                            )}
-                                        </div>
-                                    </div>
+                                    {HTMLReactParser(
+                                        `<div className="p-4 overflow-x-auto">
+                                            ${beforeDepartureRequirments?.before_departure_requirements}
+                                        </div>`
+                                    )}
                                 </section>
                             )}
 
