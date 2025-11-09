@@ -41,6 +41,10 @@ class FortifyServiceProvider extends ServiceProvider
             return inertia('Auth/Login');
         });
 
+        Fortify::requestPasswordResetLinkView(function () {
+            return inertia('Auth/ForgotPassword');
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())) . '|' . $request->ip());
 
