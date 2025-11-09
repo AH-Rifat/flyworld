@@ -29,7 +29,7 @@ const HeroSection = () => {
                                         type="radio"
                                         name="tripType"
                                         value="ONE WAY"
-                                        className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-600 dark:focus:bg-sky-600 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <label
                                         htmlFor="trip-type-1"
@@ -44,7 +44,7 @@ const HeroSection = () => {
                                         type="radio"
                                         name="tripType"
                                         value="ROUND TRIP"
-                                        className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-600 dark:focus:bg-sky-600 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <label
                                         htmlFor="trip-type-2"
@@ -59,7 +59,7 @@ const HeroSection = () => {
                                         type="radio"
                                         name="tripType"
                                         value="MULTI CITY"
-                                        className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-600 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <label
                                         htmlFor="trip-type-3"
@@ -82,7 +82,7 @@ const HeroSection = () => {
                                     <input
                                         type="text"
                                         id="from-input"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                                 <div className="w-full">
@@ -95,7 +95,7 @@ const HeroSection = () => {
                                     <input
                                         type="text"
                                         id="to-input"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ const HeroSection = () => {
                                     <input
                                         type="date"
                                         id="journey-date"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                                 <div className="w-full">
@@ -125,7 +125,7 @@ const HeroSection = () => {
                                     <input
                                         type="date"
                                         id="return-date"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                             </div>
@@ -142,7 +142,7 @@ const HeroSection = () => {
                                     <input
                                         type="number"
                                         id="adult-input"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                                 <div className="w-full">
@@ -155,7 +155,7 @@ const HeroSection = () => {
                                     <input
                                         type="number"
                                         id="child-input"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                                 <div className="w-full">
@@ -168,7 +168,7 @@ const HeroSection = () => {
                                     <input
                                         type="number"
                                         id="infant-input"
-                                        className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                        className="block w-full p-2 text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     />
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ const HeroSection = () => {
                                         type="radio"
                                         name="classType"
                                         value="ECONOMY"
-                                        className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-600 dark:focus:bg-sky-600 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <label
                                         htmlFor="class-type-1"
@@ -197,7 +197,7 @@ const HeroSection = () => {
                                         type="radio"
                                         name="classType"
                                         value="BUSINESS"
-                                        className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-600 dark:focus:bg-sky-600 dark:bg-gray-700 dark:border-gray-600"
+                                        className="w-4 h-4 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <label
                                         htmlFor="class-type-2"
