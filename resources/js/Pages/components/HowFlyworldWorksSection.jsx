@@ -13,8 +13,8 @@ const HowFlyworldWorksSection = () => {
     });
     return (
         <>
-            <section className="h-96 md:h-[46rem] bg-cover bg-[url('../../../public/assets/img/globe-map.jpg')]">
-                <h3 className="text-white font-bold text-3xl text-center absolute my-5 md:-my-9 lg:my-0 2xl:my-1 ms-7 md:ms-0 lg:top-760 2xl:top-840 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+            <section className="h-96 md:h-[46rem] bg-cover bg-[url('../../../public/assets/img/globe-map.jpg')] relative">
+                <h3 className="text-white font-bold text-3xl text-center absolute top-4 md:top-8 lg:top-12 left-1/2 transform -translate-x-1/2 z-10 w-full px-4">
                     How Flyworld Works?
                 </h3>
                 {/* Mobile Version */}
