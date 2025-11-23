@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'facebook_pixel_id' => config('services.facebook.pixel_id'),
         ]);
     }
 }

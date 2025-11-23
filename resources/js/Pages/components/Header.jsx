@@ -2,13 +2,18 @@ import { useState } from "react";
 import logo from "../../../../public/assets/img/fly-world-logo.png";
 import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { Link, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
+import FacebookPixel from "./FbPx";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { url, component } = usePage();
+    const { facebook_pixel_id: facebookPixelId } = usePage().props;
 
     return (
         <>
+            <Head>
+                {facebookPixelId && <FacebookPixel pixelId={facebookPixelId} />}
+            </Head>
             <section className="hidden md:block text-white text-[.6rem] font-semibold uppercase bg-sky-500">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
                     <div className="flex items-center space-x-3 rtl:space-x-reverse">
